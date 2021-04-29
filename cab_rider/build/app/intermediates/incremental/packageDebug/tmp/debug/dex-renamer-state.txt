@@ -1,0 +1,4 @@
+#Thu Apr 22 19:18:56 IST 2021
+base.0=C\:\\Users\\HP\\Desktop\\sgp-2\\cab_rider\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

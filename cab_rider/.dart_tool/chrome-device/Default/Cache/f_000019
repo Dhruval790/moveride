@@ -1,0 +1,811 @@
+define(['dart_sdk', 'packages/firebase_database/src/utils/push_id_generator.dart', 'packages/flutter/src/services/system_channels.dart', 'packages/firebase_core/src/firebase_app.dart'], (function load__packages__firebase_database__firebase_database_dart(dart_sdk, packages__firebase_database__src__utils__push_id_generator$46dart, packages__flutter__src__services__system_channels$46dart, packages__firebase_core__src__firebase_app$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _interceptors = dart_sdk._interceptors;
+  const _js_helper = dart_sdk._js_helper;
+  const async = dart_sdk.async;
+  const collection = dart_sdk.collection;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const push_id_generator = packages__firebase_database__src__utils__push_id_generator$46dart.src__utils__push_id_generator;
+  const platform_channel = packages__flutter__src__services__system_channels$46dart.src__services__platform_channel;
+  const message_codecs = packages__flutter__src__services__system_channels$46dart.src__services__message_codecs;
+  const message_codec = packages__flutter__src__services__system_channels$46dart.src__services__message_codec;
+  const firebase_app = packages__firebase_core__src__firebase_app$46dart.src__firebase_app;
+  var firebase_database = Object.create(dart.library);
+  var $split = dartx.split;
+  var $addAll = dartx.addAll;
+  var $isEmpty = dartx.isEmpty;
+  var $removeLast = dartx.removeLast;
+  var $last = dartx.last;
+  var $add = dartx.add;
+  var $keys = dartx.keys;
+  var $_set = dartx._set;
+  var $_get = dartx._get;
+  var $remove = dartx.remove;
+  var $join = dartx.join;
+  var $containsKey = dartx.containsKey;
+  var $toString = dartx.toString;
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    StringL: () => (T.StringL = dart.constFn(dart.legacy(core.String)))(),
+    ListOfStringL: () => (T.ListOfStringL = dart.constFn(core.List$(T.StringL())))(),
+    JSArrayOfStringL: () => (T.JSArrayOfStringL = dart.constFn(_interceptors.JSArray$(T.StringL())))(),
+    IdentityMapOfStringL$dynamic: () => (T.IdentityMapOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), dart.dynamic)))(),
+    TransactionResultL: () => (T.TransactionResultL = dart.constFn(dart.legacy(firebase_database.TransactionResult)))(),
+    CompleterOfTransactionResultL: () => (T.CompleterOfTransactionResultL = dart.constFn(async.Completer$(T.TransactionResultL())))(),
+    MapL: () => (T.MapL = dart.constFn(dart.legacy(core.Map)))(),
+    boolL: () => (T.boolL = dart.constFn(dart.legacy(core.bool)))(),
+    MapLToTransactionResultL: () => (T.MapLToTransactionResultL = dart.constFn(dart.fnType(T.TransactionResultL(), [T.MapL()])))(),
+    dynamicToNull: () => (T.dynamicToNull = dart.constFn(dart.fnType(core.Null, [dart.dynamic])))(),
+    MapOfStringL$dynamic: () => (T.MapOfStringL$dynamic = dart.constFn(core.Map$(T.StringL(), dart.dynamic)))(),
+    LinkedHashMapOfStringL$dynamic: () => (T.LinkedHashMapOfStringL$dynamic = dart.constFn(collection.LinkedHashMap$(T.StringL(), dart.dynamic)))(),
+    EventL: () => (T.EventL = dart.constFn(dart.legacy(firebase_database.Event)))(),
+    StreamControllerOfEventL: () => (T.StreamControllerOfEventL = dart.constFn(async.StreamController$(T.EventL())))(),
+    intL: () => (T.intL = dart.constFn(dart.legacy(core.int)))(),
+    FutureOrOfintL: () => (T.FutureOrOfintL = dart.constFn(async.FutureOr$(T.intL())))(),
+    FutureOrLOfintL: () => (T.FutureOrLOfintL = dart.constFn(dart.legacy(T.FutureOrOfintL())))(),
+    dynamicToFutureOrLOfintL: () => (T.dynamicToFutureOrLOfintL = dart.constFn(dart.fnType(T.FutureOrLOfintL(), [dart.dynamic])))(),
+    intLToNull: () => (T.intLToNull = dart.constFn(dart.fnType(core.Null, [T.intL()])))(),
+    VoidToNull: () => (T.VoidToNull = dart.constFn(dart.fnType(core.Null, [])))(),
+    FutureOfNull: () => (T.FutureOfNull = dart.constFn(async.Future$(core.Null)))(),
+    FutureLOfNull: () => (T.FutureLOfNull = dart.constFn(dart.legacy(T.FutureOfNull())))(),
+    intLToFutureLOfNull: () => (T.intLToFutureLOfNull = dart.constFn(dart.fnType(T.FutureLOfNull(), [T.intL()])))(),
+    DataSnapshotL: () => (T.DataSnapshotL = dart.constFn(dart.legacy(firebase_database.DataSnapshot)))(),
+    doubleL: () => (T.doubleL = dart.constFn(dart.legacy(core.double)))(),
+    _EventTypeL: () => (T._EventTypeL = dart.constFn(dart.legacy(firebase_database._EventType)))(),
+    MapLOfStringL$dynamic: () => (T.MapLOfStringL$dynamic = dart.constFn(dart.legacy(T.MapOfStringL$dynamic())))(),
+    FutureOfMapLOfStringL$dynamic: () => (T.FutureOfMapLOfStringL$dynamic = dart.constFn(async.Future$(T.MapLOfStringL$dynamic())))(),
+    FutureLOfMapLOfStringL$dynamic: () => (T.FutureLOfMapLOfStringL$dynamic = dart.constFn(dart.legacy(T.FutureOfMapLOfStringL$dynamic())))(),
+    MethodCallL: () => (T.MethodCallL = dart.constFn(dart.legacy(message_codec.MethodCall)))(),
+    MethodCallLToFutureLOfMapLOfStringL$dynamic: () => (T.MethodCallLToFutureLOfMapLOfStringL$dynamic = dart.constFn(dart.fnType(T.FutureLOfMapLOfStringL$dynamic(), [T.MethodCallL()])))(),
+    StreamControllerLOfEventL: () => (T.StreamControllerLOfEventL = dart.constFn(dart.legacy(T.StreamControllerOfEventL())))(),
+    IdentityMapOfintL$StreamControllerLOfEventL: () => (T.IdentityMapOfintL$StreamControllerLOfEventL = dart.constFn(_js_helper.IdentityMap$(T.intL(), T.StreamControllerLOfEventL())))(),
+    MutableDataL: () => (T.MutableDataL = dart.constFn(dart.legacy(firebase_database.MutableData)))(),
+    FutureOfMutableDataL: () => (T.FutureOfMutableDataL = dart.constFn(async.Future$(T.MutableDataL())))(),
+    FutureLOfMutableDataL: () => (T.FutureLOfMutableDataL = dart.constFn(dart.legacy(T.FutureOfMutableDataL())))(),
+    MutableDataLToFutureLOfMutableDataL: () => (T.MutableDataLToFutureLOfMutableDataL = dart.constFn(dart.fnType(T.FutureLOfMutableDataL(), [T.MutableDataL()])))(),
+    MutableDataLToLFutureLOfMutableDataL: () => (T.MutableDataLToLFutureLOfMutableDataL = dart.constFn(dart.legacy(T.MutableDataLToFutureLOfMutableDataL())))(),
+    IdentityMapOfintL$MutableDataLToLFutureLOfMutableDataL: () => (T.IdentityMapOfintL$MutableDataLToLFutureLOfMutableDataL = dart.constFn(_js_helper.IdentityMap$(T.intL(), T.MutableDataLToLFutureLOfMutableDataL())))()
+  };
+  var T$Eval = Object.assign({
+    _: () => T$Eval
+  }, T);
+  var S = {
+    _: () => S
+  };
+  var S$Eval = Object.assign({
+    _: () => S$Eval
+  }, S);
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: core.Duration.prototype,
+        [Duration__duration]: 5000000
+      });
+    },
+    get C1() {
+      return C[1] = dart.constMap(T.StringL(), T.StringL(), [".sv", "timestamp"]);
+    },
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: firebase_database._EventType.prototype,
+        [_name$]: "_EventType.childAdded",
+        index: 0
+      });
+    },
+    get C3() {
+      return C[3] = dart.const({
+        __proto__: firebase_database._EventType.prototype,
+        [_name$]: "_EventType.childRemoved",
+        index: 1
+      });
+    },
+    get C4() {
+      return C[4] = dart.const({
+        __proto__: firebase_database._EventType.prototype,
+        [_name$]: "_EventType.childChanged",
+        index: 2
+      });
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: firebase_database._EventType.prototype,
+        [_name$]: "_EventType.childMoved",
+        index: 3
+      });
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: firebase_database._EventType.prototype,
+        [_name$]: "_EventType.value",
+        index: 4
+      });
+    },
+    get C7() {
+      return C[7] = dart.constList([C[2] || CT.C2, C[3] || CT.C3, C[4] || CT.C4, C[5] || CT.C5, C[6] || CT.C6], T._EventTypeL());
+    },
+    get C10() {
+      return C[10] = dart.const({
+        __proto__: message_codecs.StandardMessageCodec.prototype
+      });
+    },
+    get C9() {
+      return C[9] = dart.const({
+        __proto__: message_codecs.StandardMethodCodec.prototype,
+        [StandardMethodCodec_messageCodec]: C[10] || CT.C10
+      });
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: platform_channel.MethodChannel.prototype,
+        [MethodChannel__binaryMessenger]: null,
+        [MethodChannel_codec]: C[9] || CT.C9,
+        [MethodChannel_name]: "plugins.flutter.io/firebase_database"
+      });
+    }
+  }, false);
+  var C = Array(11).fill(void 0);
+  var I = [
+    "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-3.1.6/lib/src/database_reference.dart",
+    "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-3.1.6/lib/src/query.dart",
+    "package:firebase_database/firebase_database.dart"
+  ];
+  var _database$ = dart.privateName(firebase_database, "_database");
+  var _pathComponents = dart.privateName(firebase_database, "_pathComponents");
+  var _channel = dart.privateName(firebase_database, "_channel");
+  var Duration__duration = dart.privateName(core, "Duration._duration");
+  var _parameters = dart.privateName(firebase_database, "_parameters");
+  var _copyWithParameters = dart.privateName(firebase_database, "_copyWithParameters");
+  var _observe = dart.privateName(firebase_database, "_observe");
+  firebase_database.Query = class Query extends core.Object {
+    get path() {
+      return this[_pathComponents][$join]("/");
+    }
+    [_copyWithParameters](parameters) {
+      let t0;
+      return new firebase_database.Query.__({database: this[_database$], pathComponents: this[_pathComponents], parameters: T.MapOfStringL$dynamic().unmodifiable((t0 = T.LinkedHashMapOfStringL$dynamic().from(this[_parameters]), (() => {
+          t0[$addAll](parameters);
+          return t0;
+        })()))});
+    }
+    buildArguments() {
+      let t0;
+      t0 = T.LinkedHashMapOfStringL$dynamic().from(this[_parameters]);
+      return (() => {
+        t0[$addAll](new (T.IdentityMapOfStringL$dynamic()).from(["path", this.path]));
+        return t0;
+      })();
+    }
+    [_observe](eventType) {
+      let _handle = null;
+      let controller = null;
+      controller = T.StreamControllerOfEventL().broadcast({onListen: dart.fn(() => {
+          let t0;
+          _handle = this[_database$][_channel].invokeMethod(T.intL(), "Query#observe", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "parameters", this[_parameters], "eventType", dart.toString(eventType)])).then(T.intL(), dart.fn(result => T.FutureOrLOfintL().as(result), T.dynamicToFutureOrLOfintL()));
+          _handle.then(core.Null, dart.fn(handle => {
+            firebase_database.FirebaseDatabase._observers[$_set](handle, controller);
+          }, T.intLToNull()));
+        }, T.VoidToNull()), onCancel: dart.fn(() => {
+          _handle.then(core.Null, dart.fn(handle => async.async(core.Null, (function*() {
+            let t0;
+            yield this[_database$][_channel].invokeMethod(T.intL(), "Query#removeObserver", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "parameters", this[_parameters], "handle", handle]));
+            firebase_database.FirebaseDatabase._observers[$remove](handle);
+          }).bind(this)), T.intLToFutureLOfNull()));
+        }, T.VoidToNull())});
+      return controller.stream;
+    }
+    once() {
+      return async.async(T.DataSnapshotL(), (function* once() {
+        return (yield this.onValue.first).snapshot;
+      }).bind(this));
+    }
+    get onChildAdded() {
+      return this[_observe](firebase_database._EventType.childAdded);
+    }
+    get onChildRemoved() {
+      return this[_observe](firebase_database._EventType.childRemoved);
+    }
+    get onChildChanged() {
+      return this[_observe](firebase_database._EventType.childChanged);
+    }
+    get onChildMoved() {
+      return this[_observe](firebase_database._EventType.childMoved);
+    }
+    get onValue() {
+      return this[_observe](firebase_database._EventType.value);
+    }
+    startAt(value, opts) {
+      let key = opts && 'key' in opts ? opts.key : null;
+      if (!!dart.test(this[_parameters][$containsKey]("startAt"))) dart.assertFailed(null, I[1], 106, 12, "!_parameters.containsKey('startAt')");
+      if (!(T.StringL().is(value) || T.boolL().is(value) || T.doubleL().is(value) || T.intL().is(value) || value == null)) dart.assertFailed(null, I[1], 107, 12, "value is String ||\n        value is bool ||\n        value is double ||\n        value is int ||\n        value == null");
+      let parameters = new (T.IdentityMapOfStringL$dynamic()).from(["startAt", value]);
+      if (key != null) parameters[$_set]("startAtKey", key);
+      return this[_copyWithParameters](parameters);
+    }
+    endAt(value, opts) {
+      let key = opts && 'key' in opts ? opts.key : null;
+      if (!!dart.test(this[_parameters][$containsKey]("endAt"))) dart.assertFailed(null, I[1], 122, 12, "!_parameters.containsKey('endAt')");
+      if (!(T.StringL().is(value) || T.boolL().is(value) || T.doubleL().is(value) || T.intL().is(value) || value == null)) dart.assertFailed(null, I[1], 123, 12, "value is String ||\n        value is bool ||\n        value is double ||\n        value is int ||\n        value == null");
+      let parameters = new (T.IdentityMapOfStringL$dynamic()).from(["endAt", value]);
+      if (key != null) parameters[$_set]("endAtKey", key);
+      return this[_copyWithParameters](parameters);
+    }
+    equalTo(value, opts) {
+      let key = opts && 'key' in opts ? opts.key : null;
+      if (!!dart.test(this[_parameters][$containsKey]("equalTo"))) dart.assertFailed(null, I[1], 138, 12, "!_parameters.containsKey('equalTo')");
+      if (!(T.StringL().is(value) || T.boolL().is(value) || T.doubleL().is(value) || T.intL().is(value) || value == null)) dart.assertFailed(null, I[1], 139, 12, "value is String ||\n        value is bool ||\n        value is double ||\n        value is int ||\n        value == null");
+      let parameters = new (T.IdentityMapOfStringL$dynamic()).from(["equalTo", value]);
+      if (key != null) parameters[$_set]("equalToKey", key);
+      return this[_copyWithParameters](parameters);
+    }
+    limitToFirst(limit) {
+      if (!!dart.test(this[_parameters][$containsKey]("limitToFirst"))) dart.assertFailed(null, I[1], 151, 12, "!_parameters.containsKey('limitToFirst')");
+      return this[_copyWithParameters](new (T.IdentityMapOfStringL$dynamic()).from(["limitToFirst", limit]));
+    }
+    limitToLast(limit) {
+      if (!!dart.test(this[_parameters][$containsKey]("limitToLast"))) dart.assertFailed(null, I[1], 157, 12, "!_parameters.containsKey('limitToLast')");
+      return this[_copyWithParameters](new (T.IdentityMapOfStringL$dynamic()).from(["limitToLast", limit]));
+    }
+    orderByChild(key) {
+      if (!(key != null)) dart.assertFailed(null, I[1], 166, 12, "key != null");
+      if (!!dart.test(this[_parameters][$containsKey]("orderBy"))) dart.assertFailed(null, I[1], 167, 12, "!_parameters.containsKey('orderBy')");
+      return this[_copyWithParameters](new (T.IdentityMapOfStringL$dynamic()).from(["orderBy", "child", "orderByChildKey", key]));
+    }
+    orderByKey() {
+      if (!!dart.test(this[_parameters][$containsKey]("orderBy"))) dart.assertFailed(null, I[1], 178, 12, "!_parameters.containsKey('orderBy')");
+      return this[_copyWithParameters](new (T.IdentityMapOfStringL$dynamic()).from(["orderBy", "key"]));
+    }
+    orderByValue() {
+      if (!!dart.test(this[_parameters][$containsKey]("orderBy"))) dart.assertFailed(null, I[1], 187, 12, "!_parameters.containsKey('orderBy')");
+      return this[_copyWithParameters](new (T.IdentityMapOfStringL$dynamic()).from(["orderBy", "value"]));
+    }
+    orderByPriority() {
+      if (!!dart.test(this[_parameters][$containsKey]("orderBy"))) dart.assertFailed(null, I[1], 196, 12, "!_parameters.containsKey('orderBy')");
+      return this[_copyWithParameters](new (T.IdentityMapOfStringL$dynamic()).from(["orderBy", "priority"]));
+    }
+    reference() {
+      return new firebase_database.DatabaseReference.__(this[_database$], this[_pathComponents]);
+    }
+    keepSynced(value) {
+      let t0;
+      return this[_database$][_channel].invokeMethod(dart.void, "Query#keepSynced", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "parameters", this[_parameters], "value", value]));
+    }
+  };
+  (firebase_database.Query.__ = function(opts) {
+    let t0;
+    let database = opts && 'database' in opts ? opts.database : null;
+    let pathComponents = opts && 'pathComponents' in opts ? opts.pathComponents : null;
+    let parameters = opts && 'parameters' in opts ? opts.parameters : null;
+    this[_database$] = database;
+    this[_pathComponents] = pathComponents;
+    this[_parameters] = (t0 = parameters, t0 == null ? T.MapOfStringL$dynamic().unmodifiable(new (T.IdentityMapOfStringL$dynamic()).new()) : t0);
+    if (!(database != null)) dart.assertFailed(null, I[1], 17, 16, "database != null");
+    ;
+  }).prototype = firebase_database.Query.prototype;
+  dart.addTypeTests(firebase_database.Query);
+  dart.addTypeCaches(firebase_database.Query);
+  dart.setMethodSignature(firebase_database.Query, () => ({
+    __proto__: dart.getMethods(firebase_database.Query.__proto__),
+    [_copyWithParameters]: dart.fnType(dart.legacy(firebase_database.Query), [dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))]),
+    buildArguments: dart.fnType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic)), []),
+    [_observe]: dart.fnType(dart.legacy(async.Stream$(dart.legacy(firebase_database.Event))), [dart.legacy(firebase_database._EventType)]),
+    once: dart.fnType(dart.legacy(async.Future$(dart.legacy(firebase_database.DataSnapshot))), []),
+    startAt: dart.fnType(dart.legacy(firebase_database.Query), [dart.dynamic], {key: dart.legacy(core.String)}, {}),
+    endAt: dart.fnType(dart.legacy(firebase_database.Query), [dart.dynamic], {key: dart.legacy(core.String)}, {}),
+    equalTo: dart.fnType(dart.legacy(firebase_database.Query), [dart.dynamic], {key: dart.legacy(core.String)}, {}),
+    limitToFirst: dart.fnType(dart.legacy(firebase_database.Query), [dart.legacy(core.int)]),
+    limitToLast: dart.fnType(dart.legacy(firebase_database.Query), [dart.legacy(core.int)]),
+    orderByChild: dart.fnType(dart.legacy(firebase_database.Query), [dart.legacy(core.String)]),
+    orderByKey: dart.fnType(dart.legacy(firebase_database.Query), []),
+    orderByValue: dart.fnType(dart.legacy(firebase_database.Query), []),
+    orderByPriority: dart.fnType(dart.legacy(firebase_database.Query), []),
+    reference: dart.fnType(dart.legacy(firebase_database.DatabaseReference), []),
+    keepSynced: dart.fnType(dart.legacy(async.Future$(dart.void)), [dart.legacy(core.bool)])
+  }));
+  dart.setGetterSignature(firebase_database.Query, () => ({
+    __proto__: dart.getGetters(firebase_database.Query.__proto__),
+    path: dart.legacy(core.String),
+    onChildAdded: dart.legacy(async.Stream$(dart.legacy(firebase_database.Event))),
+    onChildRemoved: dart.legacy(async.Stream$(dart.legacy(firebase_database.Event))),
+    onChildChanged: dart.legacy(async.Stream$(dart.legacy(firebase_database.Event))),
+    onChildMoved: dart.legacy(async.Stream$(dart.legacy(firebase_database.Event))),
+    onValue: dart.legacy(async.Stream$(dart.legacy(firebase_database.Event)))
+  }));
+  dart.setLibraryUri(firebase_database.Query, I[2]);
+  dart.setFieldSignature(firebase_database.Query, () => ({
+    __proto__: dart.getFields(firebase_database.Query.__proto__),
+    [_database$]: dart.finalFieldType(dart.legacy(firebase_database.FirebaseDatabase)),
+    [_pathComponents]: dart.finalFieldType(dart.legacy(core.List$(dart.legacy(core.String)))),
+    [_parameters]: dart.finalFieldType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic)))
+  }));
+  firebase_database.DatabaseReference = class DatabaseReference extends firebase_database.Query {
+    child(path) {
+      let t0;
+      return new firebase_database.DatabaseReference.__(this[_database$], (t0 = T.ListOfStringL().from(this[_pathComponents]), (() => {
+        t0[$addAll](path[$split]("/"));
+        return t0;
+      })()));
+    }
+    parent() {
+      let t0;
+      if (dart.test(this[_pathComponents][$isEmpty])) {
+        return null;
+      }
+      return new firebase_database.DatabaseReference.__(this[_database$], (t0 = T.ListOfStringL().from(this[_pathComponents]), (() => {
+        t0[$removeLast]();
+        return t0;
+      })()));
+    }
+    root() {
+      return new firebase_database.DatabaseReference.__(this[_database$], T.JSArrayOfStringL().of([]));
+    }
+    get key() {
+      return this[_pathComponents][$last];
+    }
+    push() {
+      let t0;
+      let key = push_id_generator.PushIdGenerator.generatePushChildName();
+      let childPath = (t0 = T.ListOfStringL().from(this[_pathComponents]), (() => {
+        t0[$add](key);
+        return t0;
+      })());
+      return new firebase_database.DatabaseReference.__(this[_database$], childPath);
+    }
+    set(value, opts) {
+      let t0;
+      let priority = opts && 'priority' in opts ? opts.priority : null;
+      return this[_database$][_channel].invokeMethod(dart.void, "DatabaseReference#set", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "value", value, "priority", priority]));
+    }
+    update(value) {
+      let t0;
+      return this[_database$][_channel].invokeMethod(dart.void, "DatabaseReference#update", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "value", value]));
+    }
+    setPriority(priority) {
+      return async.async(dart.void, (function* setPriority() {
+        let t0;
+        return this[_database$][_channel].invokeMethod(dart.void, "DatabaseReference#setPriority", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "priority", priority]));
+      }).bind(this));
+    }
+    remove() {
+      return this.set(null);
+    }
+    runTransaction(transactionHandler, opts) {
+      let timeout = opts && 'timeout' in opts ? opts.timeout : C[0] || CT.C0;
+      return async.async(T.TransactionResultL(), (function* runTransaction() {
+        let t0;
+        if (!(dart.notNull(timeout.inMilliseconds) > 0)) dart.assertFailed("Transaction timeout must be more than 0 milliseconds.", I[0], 149, 12, "timeout.inMilliseconds > 0");
+        let completer = T.CompleterOfTransactionResultL().new();
+        let transactionKey = dart.test(firebase_database.FirebaseDatabase._transactions[$isEmpty]) ? 0 : dart.notNull(firebase_database.FirebaseDatabase._transactions[$keys][$last]) + 1;
+        firebase_database.FirebaseDatabase._transactions[$_set](transactionKey, transactionHandler);
+        function toTransactionResult(map) {
+          let databaseError = map[$_get]("error") != null ? new firebase_database.DatabaseError.__(T.MapL().as(map[$_get]("error"))) : null;
+          let committed = T.boolL().as(map[$_get]("committed"));
+          let dataSnapshot = map[$_get]("snapshot") != null ? new firebase_database.DataSnapshot.__(T.MapL().as(map[$_get]("snapshot"))) : null;
+          firebase_database.FirebaseDatabase._transactions[$remove](transactionKey);
+          return new firebase_database.TransactionResult.__(databaseError, committed, dataSnapshot);
+        }
+        dart.fn(toTransactionResult, T.MapLToTransactionResultL());
+        this[_database$][_channel].invokeMethod(dart.void, "DatabaseReference#runTransaction", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "transactionKey", transactionKey, "transactionTimeout", timeout.inMilliseconds])).then(core.Null, dart.fn(response => {
+          completer.complete(toTransactionResult(T.MapL().as(response)));
+        }, T.dynamicToNull()));
+        return completer.future;
+      }).bind(this));
+    }
+    onDisconnect() {
+      return new firebase_database.OnDisconnect.__(this[_database$], this);
+    }
+  };
+  (firebase_database.DatabaseReference.__ = function(database, pathComponents) {
+    firebase_database.DatabaseReference.__proto__.__.call(this, {database: database, pathComponents: pathComponents});
+    ;
+  }).prototype = firebase_database.DatabaseReference.prototype;
+  dart.addTypeTests(firebase_database.DatabaseReference);
+  dart.addTypeCaches(firebase_database.DatabaseReference);
+  dart.setMethodSignature(firebase_database.DatabaseReference, () => ({
+    __proto__: dart.getMethods(firebase_database.DatabaseReference.__proto__),
+    child: dart.fnType(dart.legacy(firebase_database.DatabaseReference), [dart.legacy(core.String)]),
+    parent: dart.fnType(dart.legacy(firebase_database.DatabaseReference), []),
+    root: dart.fnType(dart.legacy(firebase_database.DatabaseReference), []),
+    push: dart.fnType(dart.legacy(firebase_database.DatabaseReference), []),
+    set: dart.fnType(dart.legacy(async.Future$(dart.void)), [dart.dynamic], {priority: dart.dynamic}, {}),
+    update: dart.fnType(dart.legacy(async.Future$(dart.void)), [dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))]),
+    setPriority: dart.fnType(dart.legacy(async.Future$(dart.void)), [dart.dynamic]),
+    remove: dart.fnType(dart.legacy(async.Future$(dart.void)), []),
+    runTransaction: dart.fnType(dart.legacy(async.Future$(dart.legacy(firebase_database.TransactionResult))), [dart.legacy(dart.fnType(dart.legacy(async.Future$(dart.legacy(firebase_database.MutableData))), [dart.legacy(firebase_database.MutableData)]))], {timeout: dart.legacy(core.Duration)}, {}),
+    onDisconnect: dart.fnType(dart.legacy(firebase_database.OnDisconnect), [])
+  }));
+  dart.setGetterSignature(firebase_database.DatabaseReference, () => ({
+    __proto__: dart.getGetters(firebase_database.DatabaseReference.__proto__),
+    key: dart.legacy(core.String)
+  }));
+  dart.setLibraryUri(firebase_database.DatabaseReference, I[2]);
+  firebase_database.ServerValue = class ServerValue extends core.Object {};
+  (firebase_database.ServerValue.new = function() {
+    ;
+  }).prototype = firebase_database.ServerValue.prototype;
+  dart.addTypeTests(firebase_database.ServerValue);
+  dart.addTypeCaches(firebase_database.ServerValue);
+  dart.setLibraryUri(firebase_database.ServerValue, I[2]);
+  dart.defineLazy(firebase_database.ServerValue, {
+    /*firebase_database.ServerValue.timestamp*/get timestamp() {
+      return C[1] || CT.C1;
+    }
+  }, true);
+  var error$ = dart.privateName(firebase_database, "TransactionResult.error");
+  var committed$ = dart.privateName(firebase_database, "TransactionResult.committed");
+  var dataSnapshot$ = dart.privateName(firebase_database, "TransactionResult.dataSnapshot");
+  firebase_database.TransactionResult = class TransactionResult extends core.Object {
+    get error() {
+      return this[error$];
+    }
+    set error(value) {
+      super.error = value;
+    }
+    get committed() {
+      return this[committed$];
+    }
+    set committed(value) {
+      super.committed = value;
+    }
+    get dataSnapshot() {
+      return this[dataSnapshot$];
+    }
+    set dataSnapshot(value) {
+      super.dataSnapshot = value;
+    }
+  };
+  (firebase_database.TransactionResult.__ = function(error, committed, dataSnapshot) {
+    this[error$] = error;
+    this[committed$] = committed;
+    this[dataSnapshot$] = dataSnapshot;
+    ;
+  }).prototype = firebase_database.TransactionResult.prototype;
+  dart.addTypeTests(firebase_database.TransactionResult);
+  dart.addTypeCaches(firebase_database.TransactionResult);
+  dart.setLibraryUri(firebase_database.TransactionResult, I[2]);
+  dart.setFieldSignature(firebase_database.TransactionResult, () => ({
+    __proto__: dart.getFields(firebase_database.TransactionResult.__proto__),
+    error: dart.finalFieldType(dart.legacy(firebase_database.DatabaseError)),
+    committed: dart.finalFieldType(dart.legacy(core.bool)),
+    dataSnapshot: dart.finalFieldType(dart.legacy(firebase_database.DataSnapshot))
+  }));
+  var _name$ = dart.privateName(firebase_database, "_name");
+  firebase_database._EventType = class _EventType extends core.Object {
+    toString() {
+      return this[_name$];
+    }
+  };
+  (firebase_database._EventType.new = function(index, _name) {
+    this.index = index;
+    this[_name$] = _name;
+    ;
+  }).prototype = firebase_database._EventType.prototype;
+  dart.addTypeTests(firebase_database._EventType);
+  dart.addTypeCaches(firebase_database._EventType);
+  dart.setMethodSignature(firebase_database._EventType, () => ({
+    __proto__: dart.getMethods(firebase_database._EventType.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(firebase_database._EventType, I[2]);
+  dart.setFieldSignature(firebase_database._EventType, () => ({
+    __proto__: dart.getFields(firebase_database._EventType.__proto__),
+    index: dart.finalFieldType(dart.legacy(core.int)),
+    [_name$]: dart.finalFieldType(dart.legacy(core.String))
+  }));
+  dart.defineExtensionMethods(firebase_database._EventType, ['toString']);
+  firebase_database._EventType.childAdded = C[2] || CT.C2;
+  firebase_database._EventType.childRemoved = C[3] || CT.C3;
+  firebase_database._EventType.childChanged = C[4] || CT.C4;
+  firebase_database._EventType.childMoved = C[5] || CT.C5;
+  firebase_database._EventType.value = C[6] || CT.C6;
+  firebase_database._EventType.values = C[7] || CT.C7;
+  var snapshot = dart.privateName(firebase_database, "Event.snapshot");
+  var _data$ = dart.privateName(firebase_database, "_data");
+  firebase_database.Event = class Event extends core.Object {
+    get snapshot() {
+      return this[snapshot];
+    }
+    set snapshot(value) {
+      super.snapshot = value;
+    }
+    get previousSiblingKey() {
+      return T.StringL().as(this[_data$][$_get]("previousSiblingKey"));
+    }
+  };
+  (firebase_database.Event.__ = function(_data) {
+    this[_data$] = _data;
+    this[snapshot] = new firebase_database.DataSnapshot.__(T.MapL().as(_data[$_get]("snapshot")));
+    ;
+  }).prototype = firebase_database.Event.prototype;
+  dart.addTypeTests(firebase_database.Event);
+  dart.addTypeCaches(firebase_database.Event);
+  dart.setGetterSignature(firebase_database.Event, () => ({
+    __proto__: dart.getGetters(firebase_database.Event.__proto__),
+    previousSiblingKey: dart.legacy(core.String)
+  }));
+  dart.setLibraryUri(firebase_database.Event, I[2]);
+  dart.setFieldSignature(firebase_database.Event, () => ({
+    __proto__: dart.getFields(firebase_database.Event.__proto__),
+    snapshot: dart.finalFieldType(dart.legacy(firebase_database.DataSnapshot)),
+    [_data$]: dart.fieldType(dart.legacy(core.Map))
+  }));
+  firebase_database.DataSnapshot = class DataSnapshot extends core.Object {
+    get key() {
+      return T.StringL().as(this[_data$][$_get]("key"));
+    }
+    get value() {
+      return this[_data$][$_get]("value");
+    }
+  };
+  (firebase_database.DataSnapshot.__ = function(_data) {
+    this[_data$] = _data;
+    ;
+  }).prototype = firebase_database.DataSnapshot.prototype;
+  dart.addTypeTests(firebase_database.DataSnapshot);
+  dart.addTypeCaches(firebase_database.DataSnapshot);
+  dart.setGetterSignature(firebase_database.DataSnapshot, () => ({
+    __proto__: dart.getGetters(firebase_database.DataSnapshot.__proto__),
+    key: dart.legacy(core.String),
+    value: dart.dynamic
+  }));
+  dart.setLibraryUri(firebase_database.DataSnapshot, I[2]);
+  dart.setFieldSignature(firebase_database.DataSnapshot, () => ({
+    __proto__: dart.getFields(firebase_database.DataSnapshot.__proto__),
+    [_data$]: dart.finalFieldType(dart.legacy(core.Map))
+  }));
+  firebase_database.MutableData = class MutableData extends core.Object {
+    get key() {
+      return T.StringL().as(this[_data$][$_get]("key"));
+    }
+    get value() {
+      return this[_data$][$_get]("value");
+    }
+    set value(newValue) {
+      let t2, t1, t0;
+      t0 = this[_data$];
+      t1 = "value";
+      t2 = newValue;
+      t0[$_set](t1, t2);
+      return t2;
+    }
+  };
+  (firebase_database.MutableData.private = function(_data) {
+    this[_data$] = _data;
+    ;
+  }).prototype = firebase_database.MutableData.prototype;
+  dart.addTypeTests(firebase_database.MutableData);
+  dart.addTypeCaches(firebase_database.MutableData);
+  dart.setGetterSignature(firebase_database.MutableData, () => ({
+    __proto__: dart.getGetters(firebase_database.MutableData.__proto__),
+    key: dart.legacy(core.String),
+    value: dart.dynamic
+  }));
+  dart.setSetterSignature(firebase_database.MutableData, () => ({
+    __proto__: dart.getSetters(firebase_database.MutableData.__proto__),
+    value: dart.dynamic
+  }));
+  dart.setLibraryUri(firebase_database.MutableData, I[2]);
+  dart.setFieldSignature(firebase_database.MutableData, () => ({
+    __proto__: dart.getFields(firebase_database.MutableData.__proto__),
+    [_data$]: dart.finalFieldType(dart.legacy(core.Map))
+  }));
+  firebase_database.DatabaseError = class DatabaseError extends core.Object {
+    get code() {
+      return T.intL().as(this[_data$][$_get]("code"));
+    }
+    get message() {
+      return T.StringL().as(this[_data$][$_get]("message"));
+    }
+    get details() {
+      return T.StringL().as(this[_data$][$_get]("details"));
+    }
+    toString() {
+      return dart.str(this.runtimeType) + "(" + dart.str(this.code) + ", " + dart.str(this.message) + ", " + dart.str(this.details) + ")";
+    }
+  };
+  (firebase_database.DatabaseError.__ = function(_data) {
+    this[_data$] = _data;
+    ;
+  }).prototype = firebase_database.DatabaseError.prototype;
+  dart.addTypeTests(firebase_database.DatabaseError);
+  dart.addTypeCaches(firebase_database.DatabaseError);
+  dart.setMethodSignature(firebase_database.DatabaseError, () => ({
+    __proto__: dart.getMethods(firebase_database.DatabaseError.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setGetterSignature(firebase_database.DatabaseError, () => ({
+    __proto__: dart.getGetters(firebase_database.DatabaseError.__proto__),
+    code: dart.legacy(core.int),
+    message: dart.legacy(core.String),
+    details: dart.legacy(core.String)
+  }));
+  dart.setLibraryUri(firebase_database.DatabaseError, I[2]);
+  dart.setFieldSignature(firebase_database.DatabaseError, () => ({
+    __proto__: dart.getFields(firebase_database.DatabaseError.__proto__),
+    [_data$]: dart.fieldType(dart.legacy(core.Map))
+  }));
+  dart.defineExtensionMethods(firebase_database.DatabaseError, ['toString']);
+  var app$ = dart.privateName(firebase_database, "FirebaseDatabase.app");
+  var databaseURL$ = dart.privateName(firebase_database, "FirebaseDatabase.databaseURL");
+  var MethodChannel__binaryMessenger = dart.privateName(platform_channel, "MethodChannel._binaryMessenger");
+  var StandardMethodCodec_messageCodec = dart.privateName(message_codecs, "StandardMethodCodec.messageCodec");
+  var MethodChannel_codec = dart.privateName(platform_channel, "MethodChannel.codec");
+  var MethodChannel_name = dart.privateName(platform_channel, "MethodChannel.name");
+  firebase_database.FirebaseDatabase = class FirebaseDatabase extends core.Object {
+    get app() {
+      return this[app$];
+    }
+    set app(value) {
+      super.app = value;
+    }
+    get databaseURL() {
+      return this[databaseURL$];
+    }
+    set databaseURL(value) {
+      super.databaseURL = value;
+    }
+    static get instance() {
+      return firebase_database.FirebaseDatabase._instance;
+    }
+    reference() {
+      return new firebase_database.DatabaseReference.__(this, T.JSArrayOfStringL().of([]));
+    }
+    setPersistenceEnabled(enabled) {
+      return async.async(T.boolL(), (function* setPersistenceEnabled() {
+        let t0;
+        let result = (yield this[_channel].invokeMethod(T.boolL(), "FirebaseDatabase#setPersistenceEnabled", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this.app, t0 == null ? null : t0.name), "databaseURL", this.databaseURL, "enabled", enabled])));
+        return result;
+      }).bind(this));
+    }
+    setPersistenceCacheSizeBytes(cacheSize) {
+      return async.async(T.boolL(), (function* setPersistenceCacheSizeBytes() {
+        let t0;
+        let result = (yield this[_channel].invokeMethod(T.boolL(), "FirebaseDatabase#setPersistenceCacheSizeBytes", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this.app, t0 == null ? null : t0.name), "databaseURL", this.databaseURL, "cacheSize", cacheSize])));
+        return result;
+      }).bind(this));
+    }
+    goOnline() {
+      let t0;
+      return this[_channel].invokeMethod(dart.void, "FirebaseDatabase#goOnline", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this.app, t0 == null ? null : t0.name), "databaseURL", this.databaseURL]));
+    }
+    goOffline() {
+      let t0;
+      return this[_channel].invokeMethod(dart.void, "FirebaseDatabase#goOffline", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this.app, t0 == null ? null : t0.name), "databaseURL", this.databaseURL]));
+    }
+    purgeOutstandingWrites() {
+      let t0;
+      return this[_channel].invokeMethod(dart.void, "FirebaseDatabase#purgeOutstandingWrites", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this.app, t0 == null ? null : t0.name), "databaseURL", this.databaseURL]));
+    }
+  };
+  (firebase_database.FirebaseDatabase.new = function(opts) {
+    let app = opts && 'app' in opts ? opts.app : null;
+    let databaseURL = opts && 'databaseURL' in opts ? opts.databaseURL : null;
+    this[_channel] = C[8] || CT.C8;
+    this[app$] = app;
+    this[databaseURL$] = databaseURL;
+    if (dart.test(firebase_database.FirebaseDatabase._initialized)) return;
+    this[_channel].setMethodCallHandler(dart.fn(call => async.async(T.MapLOfStringL$dynamic(), function*() {
+      switch (call.method) {
+        case "Event":
+        {
+          let event = new firebase_database.Event.__(T.MapL().as(call.arguments));
+          firebase_database.FirebaseDatabase._observers[$_get](dart.dsend(call.arguments, '_get', ["handle"])).add(event);
+          return null;
+        }
+        case "Error":
+        {
+          let error = new firebase_database.DatabaseError.__(T.MapL().as(dart.dsend(call.arguments, '_get', ["error"])));
+          firebase_database.FirebaseDatabase._observers[$_get](dart.dsend(call.arguments, '_get', ["handle"])).addError(error);
+          return null;
+        }
+        case "DoTransaction":
+        {
+          let mutableData = new firebase_database.MutableData.private(T.MapL().as(dart.dsend(call.arguments, '_get', ["snapshot"])));
+          let updated = (yield firebase_database.FirebaseDatabase._transactions[$_get](dart.dsend(call.arguments, '_get', ["transactionKey"]))(mutableData));
+          return new (T.IdentityMapOfStringL$dynamic()).from(["value", updated.value]);
+        }
+        default:
+        {
+          dart.throw(new message_codec.MissingPluginException.new(dart.str(call.method) + " method not implemented on the Dart side."));
+        }
+      }
+    }), T.MethodCallLToFutureLOfMapLOfStringL$dynamic()));
+    firebase_database.FirebaseDatabase._initialized = true;
+  }).prototype = firebase_database.FirebaseDatabase.prototype;
+  dart.addTypeTests(firebase_database.FirebaseDatabase);
+  dart.addTypeCaches(firebase_database.FirebaseDatabase);
+  dart.setMethodSignature(firebase_database.FirebaseDatabase, () => ({
+    __proto__: dart.getMethods(firebase_database.FirebaseDatabase.__proto__),
+    reference: dart.fnType(dart.legacy(firebase_database.DatabaseReference), []),
+    setPersistenceEnabled: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.bool))), [dart.legacy(core.bool)]),
+    setPersistenceCacheSizeBytes: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.bool))), [dart.legacy(core.int)]),
+    goOnline: dart.fnType(dart.legacy(async.Future$(dart.void)), []),
+    goOffline: dart.fnType(dart.legacy(async.Future$(dart.void)), []),
+    purgeOutstandingWrites: dart.fnType(dart.legacy(async.Future$(dart.void)), [])
+  }));
+  dart.setLibraryUri(firebase_database.FirebaseDatabase, I[2]);
+  dart.setFieldSignature(firebase_database.FirebaseDatabase, () => ({
+    __proto__: dart.getFields(firebase_database.FirebaseDatabase.__proto__),
+    [_channel]: dart.finalFieldType(dart.legacy(platform_channel.MethodChannel)),
+    app: dart.finalFieldType(dart.legacy(firebase_app.FirebaseApp)),
+    databaseURL: dart.finalFieldType(dart.legacy(core.String))
+  }));
+  dart.defineLazy(firebase_database.FirebaseDatabase, {
+    /*firebase_database.FirebaseDatabase._observers*/get _observers() {
+      return new (T.IdentityMapOfintL$StreamControllerLOfEventL()).new();
+    },
+    /*firebase_database.FirebaseDatabase._transactions*/get _transactions() {
+      return new (T.IdentityMapOfintL$MutableDataLToLFutureLOfMutableDataL()).new();
+    },
+    /*firebase_database.FirebaseDatabase._initialized*/get _initialized() {
+      return false;
+    },
+    set _initialized(_) {},
+    /*firebase_database.FirebaseDatabase._instance*/get _instance() {
+      return new firebase_database.FirebaseDatabase.new();
+    },
+    set _instance(_) {}
+  }, true);
+  var path = dart.privateName(firebase_database, "OnDisconnect.path");
+  firebase_database.OnDisconnect = class OnDisconnect extends core.Object {
+    get path() {
+      return this[path];
+    }
+    set path(value) {
+      super.path = value;
+    }
+    set(value, opts) {
+      let t0;
+      let priority = opts && 'priority' in opts ? opts.priority : null;
+      return this[_database$][_channel].invokeMethod(dart.void, "OnDisconnect#set", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "value", value, "priority", priority]));
+    }
+    remove() {
+      return this.set(null);
+    }
+    cancel() {
+      let t0;
+      return this[_database$][_channel].invokeMethod(dart.void, "OnDisconnect#cancel", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path]));
+    }
+    update(value) {
+      let t0;
+      return this[_database$][_channel].invokeMethod(dart.void, "OnDisconnect#update", new (T.IdentityMapOfStringL$dynamic()).from(["app", (t0 = this[_database$].app, t0 == null ? null : t0.name), "databaseURL", this[_database$].databaseURL, "path", this.path, "value", value]));
+    }
+  };
+  (firebase_database.OnDisconnect.__ = function(_database, reference) {
+    this[_database$] = _database;
+    this[path] = reference.path;
+    ;
+  }).prototype = firebase_database.OnDisconnect.prototype;
+  dart.addTypeTests(firebase_database.OnDisconnect);
+  dart.addTypeCaches(firebase_database.OnDisconnect);
+  dart.setMethodSignature(firebase_database.OnDisconnect, () => ({
+    __proto__: dart.getMethods(firebase_database.OnDisconnect.__proto__),
+    set: dart.fnType(dart.legacy(async.Future$(dart.void)), [dart.dynamic], {priority: dart.dynamic}, {}),
+    remove: dart.fnType(dart.legacy(async.Future$(dart.void)), []),
+    cancel: dart.fnType(dart.legacy(async.Future$(dart.void)), []),
+    update: dart.fnType(dart.legacy(async.Future$(dart.void)), [dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic))])
+  }));
+  dart.setLibraryUri(firebase_database.OnDisconnect, I[2]);
+  dart.setFieldSignature(firebase_database.OnDisconnect, () => ({
+    __proto__: dart.getFields(firebase_database.OnDisconnect.__proto__),
+    [_database$]: dart.finalFieldType(dart.legacy(firebase_database.FirebaseDatabase)),
+    path: dart.finalFieldType(dart.legacy(core.String))
+  }));
+  dart.trackLibraries("packages/firebase_database/firebase_database.dart", {
+    "package:firebase_database/firebase_database.dart": firebase_database
+  }, {
+    "package:firebase_database/firebase_database.dart": ["src/database_reference.dart", "src/event.dart", "src/firebase_database.dart", "src/query.dart", "src/on_disconnect.dart"]
+  }, '{"version":3,"sourceRoot":"","sources":["src/query.dart","src/database_reference.dart","src/event.dart","src/firebase_database.dart","src/on_disconnect.dart"],"names":[],"mappings":"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","file":"../../../../../../../C:/packages/firebase_database/firebase_database.dart.lib.js"}');
+  // Exports:
+  return {
+    firebase_database: firebase_database
+  };
+}));
+
+//# sourceMappingURL=firebase_database.dart.lib.js.map

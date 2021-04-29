@@ -1,0 +1,770 @@
+define(['dart_sdk', 'packages/flutter/src/painting/strut_style.dart', 'packages/flutter/src/material/colors.dart', 'packages/flutter/src/painting/colors.dart', 'packages/flutter/src/widgets/widget_span.dart', 'packages/flutter/src/animation/animation_controller.dart', 'packages/flutter/src/animation/listener_helpers.dart', 'packages/flutter/src/painting/gradient.dart', 'packages/flutter/src/rendering/layer.dart', 'packages/flutter/src/rendering/custom_paint.dart'], (function load__packages__animated_text_kit__src__text_liquid_fill_dart(dart_sdk, packages__flutter__src__painting__strut_style$46dart, packages__flutter__src__material__colors$46dart, packages__flutter__src__painting__colors$46dart, packages__flutter__src__widgets__widget_span$46dart, packages__flutter__src__animation__animation_controller$46dart, packages__flutter__src__animation__listener_helpers$46dart, packages__flutter__src__painting__gradient$46dart, packages__flutter__src__rendering__layer$46dart, packages__flutter__src__rendering__custom_paint$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const ui = dart_sdk.ui;
+  const _interceptors = dart_sdk._interceptors;
+  const math = dart_sdk.math;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const text_style = packages__flutter__src__painting__strut_style$46dart.src__painting__text_style;
+  const colors = packages__flutter__src__material__colors$46dart.src__material__colors;
+  const colors$ = packages__flutter__src__painting__colors$46dart.src__painting__colors;
+  const framework = packages__flutter__src__widgets__widget_span$46dart.src__widgets__framework;
+  const basic = packages__flutter__src__widgets__widget_span$46dart.src__widgets__basic;
+  const transitions = packages__flutter__src__widgets__widget_span$46dart.src__widgets__transitions;
+  const widget_inspector = packages__flutter__src__widgets__widget_span$46dart.src__widgets__widget_inspector;
+  const container = packages__flutter__src__widgets__widget_span$46dart.src__widgets__container;
+  const text = packages__flutter__src__widgets__widget_span$46dart.src__widgets__text;
+  const ticker_provider = packages__flutter__src__widgets__widget_span$46dart.src__widgets__ticker_provider;
+  const animation_controller = packages__flutter__src__animation__animation_controller$46dart.src__animation__animation_controller;
+  const tween = packages__flutter__src__animation__listener_helpers$46dart.src__animation__tween;
+  const animation = packages__flutter__src__animation__listener_helpers$46dart.src__animation__animation;
+  const gradient = packages__flutter__src__painting__gradient$46dart.src__painting__gradient;
+  const box = packages__flutter__src__rendering__layer$46dart.src__rendering__box;
+  const custom_paint = packages__flutter__src__rendering__custom_paint$46dart.src__rendering__custom_paint;
+  var text_liquid_fill = Object.create(dart.library);
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    intL: () => (T.intL = dart.constFn(dart.legacy(core.int)))(),
+    ColorL: () => (T.ColorL = dart.constFn(dart.legacy(ui.Color)))(),
+    StatefulWidgetL: () => (T.StatefulWidgetL = dart.constFn(dart.legacy(framework.StatefulWidget)))(),
+    StateOfStatefulWidgetL: () => (T.StateOfStatefulWidgetL = dart.constFn(framework.State$(T.StatefulWidgetL())))(),
+    StateLOfStatefulWidgetL: () => (T.StateLOfStatefulWidgetL = dart.constFn(dart.legacy(T.StateOfStatefulWidgetL())))(),
+    GlobalKeyOfStateLOfStatefulWidgetL: () => (T.GlobalKeyOfStateLOfStatefulWidgetL = dart.constFn(framework.GlobalKey$(T.StateLOfStatefulWidgetL())))(),
+    doubleL: () => (T.doubleL = dart.constFn(dart.legacy(core.double)))(),
+    TweenOfdoubleL: () => (T.TweenOfdoubleL = dart.constFn(tween.Tween$(T.doubleL())))(),
+    AnimationStatusL: () => (T.AnimationStatusL = dart.constFn(dart.legacy(animation.AnimationStatus)))(),
+    AnimationStatusLToNull: () => (T.AnimationStatusLToNull = dart.constFn(dart.fnType(core.Null, [T.AnimationStatusL()])))(),
+    _LocationL: () => (T._LocationL = dart.constFn(dart.legacy(widget_inspector._Location)))(),
+    CustomPaintL: () => (T.CustomPaintL = dart.constFn(dart.legacy(basic.CustomPaint)))(),
+    BuildContextL: () => (T.BuildContextL = dart.constFn(dart.legacy(framework.BuildContext)))(),
+    WidgetL: () => (T.WidgetL = dart.constFn(dart.legacy(framework.Widget)))(),
+    BuildContextLAndWidgetLToCustomPaintL: () => (T.BuildContextLAndWidgetLToCustomPaintL = dart.constFn(dart.fnType(T.CustomPaintL(), [T.BuildContextL(), T.WidgetL()])))(),
+    JSArrayOfColorL: () => (T.JSArrayOfColorL = dart.constFn(_interceptors.JSArray$(T.ColorL())))(),
+    JSArrayOfdoubleL: () => (T.JSArrayOfdoubleL = dart.constFn(_interceptors.JSArray$(T.doubleL())))(),
+    ShaderL: () => (T.ShaderL = dart.constFn(dart.legacy(ui.Shader)))(),
+    RectL: () => (T.RectL = dart.constFn(dart.legacy(ui.Rect)))(),
+    RectLToShaderL: () => (T.RectLToShaderL = dart.constFn(dart.fnType(T.ShaderL(), [T.RectL()])))(),
+    JSArrayOfWidgetL: () => (T.JSArrayOfWidgetL = dart.constFn(_interceptors.JSArray$(T.WidgetL())))(),
+    RenderBoxL: () => (T.RenderBoxL = dart.constFn(dart.legacy(box.RenderBox)))(),
+    CustomPainterL: () => (T.CustomPainterL = dart.constFn(dart.legacy(custom_paint.CustomPainter)))()
+  };
+  var T$Eval = Object.assign({
+    _: () => T$Eval
+  }, T);
+  var S = {
+    _: () => S
+  };
+  var S$Eval = Object.assign({
+    _: () => S$Eval
+  }, S);
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C1() {
+      return C[1] = dart.const({
+        __proto__: ui.FontWeight.prototype,
+        [FontWeight_index]: 6
+      });
+    },
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: text_style.TextStyle.prototype,
+        [TextStyle_fontFeatures]: null,
+        [TextStyle_shadows]: null,
+        [TextStyle_debugLabel]: null,
+        [TextStyle_decorationThickness]: null,
+        [TextStyle_decorationStyle]: null,
+        [TextStyle_decorationColor]: null,
+        [TextStyle_decoration]: null,
+        [TextStyle_background]: null,
+        [TextStyle_foreground]: null,
+        [TextStyle_locale]: null,
+        [TextStyle_height]: null,
+        [TextStyle_textBaseline]: null,
+        [TextStyle_wordSpacing]: null,
+        [TextStyle_letterSpacing]: null,
+        [TextStyle_fontStyle]: null,
+        [TextStyle_fontWeight]: C[1] || CT.C1,
+        [TextStyle_fontSize]: 140,
+        [TextStyle__package]: null,
+        [TextStyle__fontFamilyFallback]: null,
+        [TextStyle_fontFamily]: null,
+        [TextStyle_backgroundColor]: null,
+        [TextStyle_color]: null,
+        [TextStyle_inherit]: true
+      });
+    },
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.left",
+        index: 0
+      });
+    },
+    get C3() {
+      return C[3] = dart.const({
+        __proto__: core.Duration.prototype,
+        [Duration__duration]: 6000000
+      });
+    },
+    get C4() {
+      return C[4] = dart.const({
+        __proto__: core.Duration.prototype,
+        [Duration__duration]: 2000000
+      });
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: ui.Color.prototype,
+        [Color_value]: 4278190080.0
+      });
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: ui.Color.prototype,
+        [Color_value]: 4286755327.0
+      });
+    },
+    get C9() {
+      return C[9] = dart.const({
+        __proto__: ui.Color.prototype,
+        [Color_value]: 4282682111.0
+      });
+    },
+    get C10() {
+      return C[10] = dart.const({
+        __proto__: ui.Color.prototype,
+        [Color_value]: 4280908287.0
+      });
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: ui.Color.prototype,
+        [Color_value]: 4280902399.0
+      });
+    },
+    get C7() {
+      return C[7] = dart.constMap(T.intL(), T.ColorL(), [100, C[8] || CT.C8, 200, C[9] || CT.C9, 400, C[10] || CT.C10, 700, C[11] || CT.C11]);
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: colors.MaterialAccentColor.prototype,
+        [Color_value]: 4282682111.0,
+        [ColorSwatch__swatch]: C[7] || CT.C7
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "painter",
+        [_Location_column]: 17,
+        [_Location_line]: 134,
+        [_Location_file]: null
+      });
+    },
+    get C13() {
+      return C[13] = dart.constList([C[14] || CT.C14], T._LocationL());
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[13] || CT.C13,
+        [_Location_name]: null,
+        [_Location_column]: 22,
+        [_Location_line]: 133,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C17() {
+      return C[17] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "animation",
+        [_Location_column]: 13,
+        [_Location_line]: 131,
+        [_Location_file]: null
+      });
+    },
+    get C18() {
+      return C[18] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "builder",
+        [_Location_column]: 13,
+        [_Location_line]: 132,
+        [_Location_file]: null
+      });
+    },
+    get C16() {
+      return C[16] = dart.constList([C[17] || CT.C17, C[18] || CT.C18], T._LocationL());
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[16] || CT.C16,
+        [_Location_name]: null,
+        [_Location_column]: 18,
+        [_Location_line]: 130,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C21() {
+      return C[21] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "height",
+        [_Location_column]: 11,
+        [_Location_line]: 128,
+        [_Location_file]: null
+      });
+    },
+    get C22() {
+      return C[22] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "width",
+        [_Location_column]: 11,
+        [_Location_line]: 129,
+        [_Location_file]: null
+      });
+    },
+    get C23() {
+      return C[23] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "child",
+        [_Location_column]: 11,
+        [_Location_line]: 130,
+        [_Location_file]: null
+      });
+    },
+    get C20() {
+      return C[20] = dart.constList([C[21] || CT.C21, C[22] || CT.C22, C[23] || CT.C23], T._LocationL());
+    },
+    get C19() {
+      return C[19] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[20] || CT.C20,
+        [_Location_name]: null,
+        [_Location_column]: 9,
+        [_Location_line]: 127,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C26() {
+      return C[26] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "data",
+        [_Location_column]: 26,
+        [_Location_line]: 158,
+        [_Location_file]: null
+      });
+    },
+    get C27() {
+      return C[27] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "key",
+        [_Location_column]: 19,
+        [_Location_line]: 159,
+        [_Location_file]: null
+      });
+    },
+    get C28() {
+      return C[28] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "style",
+        [_Location_column]: 19,
+        [_Location_line]: 160,
+        [_Location_file]: null
+      });
+    },
+    get C29() {
+      return C[29] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "textAlign",
+        [_Location_column]: 19,
+        [_Location_line]: 161,
+        [_Location_file]: null
+      });
+    },
+    get C25() {
+      return C[25] = dart.constList([C[26] || CT.C26, C[27] || CT.C27, C[28] || CT.C28, C[29] || CT.C29], T._LocationL());
+    },
+    get C24() {
+      return C[24] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[25] || CT.C25,
+        [_Location_name]: null,
+        [_Location_column]: 24,
+        [_Location_line]: 157,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C32() {
+      return C[32] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "child",
+        [_Location_column]: 17,
+        [_Location_line]: 157,
+        [_Location_file]: null
+      });
+    },
+    get C31() {
+      return C[31] = dart.constList([C[32] || CT.C32], T._LocationL());
+    },
+    get C30() {
+      return C[30] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[31] || CT.C31,
+        [_Location_name]: null,
+        [_Location_column]: 22,
+        [_Location_line]: 156,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C35() {
+      return C[35] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "color",
+        [_Location_column]: 15,
+        [_Location_line]: 155,
+        [_Location_file]: null
+      });
+    },
+    get C36() {
+      return C[36] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "child",
+        [_Location_column]: 15,
+        [_Location_line]: 156,
+        [_Location_file]: null
+      });
+    },
+    get C34() {
+      return C[34] = dart.constList([C[35] || CT.C35, C[36] || CT.C36], T._LocationL());
+    },
+    get C33() {
+      return C[33] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[34] || CT.C34,
+        [_Location_name]: null,
+        [_Location_column]: 20,
+        [_Location_line]: 154,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C39() {
+      return C[39] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "blendMode",
+        [_Location_column]: 13,
+        [_Location_line]: 149,
+        [_Location_file]: null
+      });
+    },
+    get C40() {
+      return C[40] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "shaderCallback",
+        [_Location_column]: 13,
+        [_Location_line]: 150,
+        [_Location_file]: null
+      });
+    },
+    get C41() {
+      return C[41] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "child",
+        [_Location_column]: 13,
+        [_Location_line]: 154,
+        [_Location_file]: null
+      });
+    },
+    get C38() {
+      return C[38] = dart.constList([C[39] || CT.C39, C[40] || CT.C40, C[41] || CT.C41], T._LocationL());
+    },
+    get C37() {
+      return C[37] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[38] || CT.C38,
+        [_Location_name]: null,
+        [_Location_column]: 18,
+        [_Location_line]: 148,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C44() {
+      return C[44] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "height",
+        [_Location_column]: 11,
+        [_Location_line]: 146,
+        [_Location_file]: null
+      });
+    },
+    get C45() {
+      return C[45] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "width",
+        [_Location_column]: 11,
+        [_Location_line]: 147,
+        [_Location_file]: null
+      });
+    },
+    get C46() {
+      return C[46] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "child",
+        [_Location_column]: 11,
+        [_Location_line]: 148,
+        [_Location_file]: null
+      });
+    },
+    get C43() {
+      return C[43] = dart.constList([C[44] || CT.C44, C[45] || CT.C45, C[46] || CT.C46], T._LocationL());
+    },
+    get C42() {
+      return C[42] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[43] || CT.C43,
+        [_Location_name]: null,
+        [_Location_column]: 9,
+        [_Location_line]: 145,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    },
+    get C49() {
+      return C[49] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "children",
+        [_Location_column]: 7,
+        [_Location_line]: 126,
+        [_Location_file]: null
+      });
+    },
+    get C48() {
+      return C[48] = dart.constList([C[49] || CT.C49], T._LocationL());
+    },
+    get C47() {
+      return C[47] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[48] || CT.C48,
+        [_Location_name]: null,
+        [_Location_column]: 12,
+        [_Location_line]: 125,
+        [_Location_file]: "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart"
+      });
+    }
+  }, false);
+  var C = Array(50).fill(void 0);
+  var I = [
+    "file:///F:/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.5.4/lib/src/text_liquid_fill.dart",
+    "package:animated_text_kit/src/text_liquid_fill.dart"
+  ];
+  var textStyle$ = dart.privateName(text_liquid_fill, "TextLiquidFill.textStyle");
+  var textAlign$ = dart.privateName(text_liquid_fill, "TextLiquidFill.textAlign");
+  var loadDuration$ = dart.privateName(text_liquid_fill, "TextLiquidFill.loadDuration");
+  var waveDuration$ = dart.privateName(text_liquid_fill, "TextLiquidFill.waveDuration");
+  var boxHeight$ = dart.privateName(text_liquid_fill, "TextLiquidFill.boxHeight");
+  var boxWidth$ = dart.privateName(text_liquid_fill, "TextLiquidFill.boxWidth");
+  var text$ = dart.privateName(text_liquid_fill, "TextLiquidFill.text");
+  var boxBackgroundColor$ = dart.privateName(text_liquid_fill, "TextLiquidFill.boxBackgroundColor");
+  var waveColor$ = dart.privateName(text_liquid_fill, "TextLiquidFill.waveColor");
+  var TextStyle_fontFeatures = dart.privateName(text_style, "TextStyle.fontFeatures");
+  var TextStyle_shadows = dart.privateName(text_style, "TextStyle.shadows");
+  var TextStyle_debugLabel = dart.privateName(text_style, "TextStyle.debugLabel");
+  var TextStyle_decorationThickness = dart.privateName(text_style, "TextStyle.decorationThickness");
+  var TextStyle_decorationStyle = dart.privateName(text_style, "TextStyle.decorationStyle");
+  var TextStyle_decorationColor = dart.privateName(text_style, "TextStyle.decorationColor");
+  var TextStyle_decoration = dart.privateName(text_style, "TextStyle.decoration");
+  var TextStyle_background = dart.privateName(text_style, "TextStyle.background");
+  var TextStyle_foreground = dart.privateName(text_style, "TextStyle.foreground");
+  var TextStyle_locale = dart.privateName(text_style, "TextStyle.locale");
+  var TextStyle_height = dart.privateName(text_style, "TextStyle.height");
+  var TextStyle_textBaseline = dart.privateName(text_style, "TextStyle.textBaseline");
+  var TextStyle_wordSpacing = dart.privateName(text_style, "TextStyle.wordSpacing");
+  var TextStyle_letterSpacing = dart.privateName(text_style, "TextStyle.letterSpacing");
+  var TextStyle_fontStyle = dart.privateName(text_style, "TextStyle.fontStyle");
+  var FontWeight_index = dart.privateName(ui, "FontWeight.index");
+  var TextStyle_fontWeight = dart.privateName(text_style, "TextStyle.fontWeight");
+  var TextStyle_fontSize = dart.privateName(text_style, "TextStyle.fontSize");
+  var TextStyle__package = dart.privateName(text_style, "TextStyle._package");
+  var TextStyle__fontFamilyFallback = dart.privateName(text_style, "TextStyle._fontFamilyFallback");
+  var TextStyle_fontFamily = dart.privateName(text_style, "TextStyle.fontFamily");
+  var TextStyle_backgroundColor = dart.privateName(text_style, "TextStyle.backgroundColor");
+  var TextStyle_color = dart.privateName(text_style, "TextStyle.color");
+  var TextStyle_inherit = dart.privateName(text_style, "TextStyle.inherit");
+  var _name = dart.privateName(ui, "_name");
+  var Duration__duration = dart.privateName(core, "Duration._duration");
+  var Color_value = dart.privateName(ui, "Color.value");
+  var ColorSwatch__swatch = dart.privateName(colors$, "ColorSwatch._swatch");
+  text_liquid_fill.TextLiquidFill = class TextLiquidFill extends framework.StatefulWidget {
+    get textStyle() {
+      return this[textStyle$];
+    }
+    set textStyle(value) {
+      super.textStyle = value;
+    }
+    get textAlign() {
+      return this[textAlign$];
+    }
+    set textAlign(value) {
+      super.textAlign = value;
+    }
+    get loadDuration() {
+      return this[loadDuration$];
+    }
+    set loadDuration(value) {
+      super.loadDuration = value;
+    }
+    get waveDuration() {
+      return this[waveDuration$];
+    }
+    set waveDuration(value) {
+      super.waveDuration = value;
+    }
+    get boxHeight() {
+      return this[boxHeight$];
+    }
+    set boxHeight(value) {
+      super.boxHeight = value;
+    }
+    get boxWidth() {
+      return this[boxWidth$];
+    }
+    set boxWidth(value) {
+      super.boxWidth = value;
+    }
+    get text() {
+      return this[text$];
+    }
+    set text(value) {
+      super.text = value;
+    }
+    get boxBackgroundColor() {
+      return this[boxBackgroundColor$];
+    }
+    set boxBackgroundColor(value) {
+      super.boxBackgroundColor = value;
+    }
+    get waveColor() {
+      return this[waveColor$];
+    }
+    set waveColor(value) {
+      super.waveColor = value;
+    }
+    createState() {
+      return new text_liquid_fill._TextLiquidFillState.new();
+    }
+  };
+  (text_liquid_fill.TextLiquidFill.new = function(opts) {
+    let key = opts && 'key' in opts ? opts.key : null;
+    let text = opts && 'text' in opts ? opts.text : null;
+    let textStyle = opts && 'textStyle' in opts ? opts.textStyle : C[0] || CT.C0;
+    let textAlign = opts && 'textAlign' in opts ? opts.textAlign : C[2] || CT.C2;
+    let loadDuration = opts && 'loadDuration' in opts ? opts.loadDuration : C[3] || CT.C3;
+    let waveDuration = opts && 'waveDuration' in opts ? opts.waveDuration : C[4] || CT.C4;
+    let boxHeight = opts && 'boxHeight' in opts ? opts.boxHeight : 250;
+    let boxWidth = opts && 'boxWidth' in opts ? opts.boxWidth : 400;
+    let boxBackgroundColor = opts && 'boxBackgroundColor' in opts ? opts.boxBackgroundColor : C[5] || CT.C5;
+    let waveColor = opts && 'waveColor' in opts ? opts.waveColor : C[6] || CT.C6;
+    let $36creationLocationd_0dea112b090073317d4 = opts && '$creationLocationd_0dea112b090073317d4' in opts ? opts.$creationLocationd_0dea112b090073317d4 : null;
+    this[text$] = text;
+    this[textStyle$] = textStyle;
+    this[textAlign$] = textAlign;
+    this[loadDuration$] = loadDuration;
+    this[waveDuration$] = waveDuration;
+    this[boxHeight$] = boxHeight;
+    this[boxWidth$] = boxWidth;
+    this[boxBackgroundColor$] = boxBackgroundColor;
+    this[waveColor$] = waveColor;
+    if (!(text != null)) dart.assertFailed(null, I[0], 64, 16, "null != text");
+    if (!(textStyle != null)) dart.assertFailed(null, I[0], 65, 16, "null != textStyle");
+    if (!(textAlign != null)) dart.assertFailed(null, I[0], 66, 16, "null != textAlign");
+    if (!(loadDuration != null)) dart.assertFailed(null, I[0], 67, 16, "null != loadDuration");
+    if (!(waveDuration != null)) dart.assertFailed(null, I[0], 68, 16, "null != waveDuration");
+    if (!(boxHeight != null)) dart.assertFailed(null, I[0], 69, 16, "null != boxHeight");
+    if (!(boxWidth != null)) dart.assertFailed(null, I[0], 70, 16, "null != boxWidth");
+    if (!(boxBackgroundColor != null)) dart.assertFailed(null, I[0], 71, 16, "null != boxBackgroundColor");
+    if (!(waveColor != null)) dart.assertFailed(null, I[0], 72, 16, "null != waveColor");
+    text_liquid_fill.TextLiquidFill.__proto__.new.call(this, {key: key, $creationLocationd_0dea112b090073317d4: $36creationLocationd_0dea112b090073317d4});
+    ;
+  }).prototype = text_liquid_fill.TextLiquidFill.prototype;
+  dart.addTypeTests(text_liquid_fill.TextLiquidFill);
+  dart.addTypeCaches(text_liquid_fill.TextLiquidFill);
+  dart.setMethodSignature(text_liquid_fill.TextLiquidFill, () => ({
+    __proto__: dart.getMethods(text_liquid_fill.TextLiquidFill.__proto__),
+    createState: dart.fnType(dart.legacy(text_liquid_fill._TextLiquidFillState), [])
+  }));
+  dart.setLibraryUri(text_liquid_fill.TextLiquidFill, I[1]);
+  dart.setFieldSignature(text_liquid_fill.TextLiquidFill, () => ({
+    __proto__: dart.getFields(text_liquid_fill.TextLiquidFill.__proto__),
+    textStyle: dart.finalFieldType(dart.legacy(text_style.TextStyle)),
+    textAlign: dart.finalFieldType(dart.legacy(ui.TextAlign)),
+    loadDuration: dart.finalFieldType(dart.legacy(core.Duration)),
+    waveDuration: dart.finalFieldType(dart.legacy(core.Duration)),
+    boxHeight: dart.finalFieldType(dart.legacy(core.double)),
+    boxWidth: dart.finalFieldType(dart.legacy(core.double)),
+    text: dart.finalFieldType(dart.legacy(core.String)),
+    boxBackgroundColor: dart.finalFieldType(dart.legacy(ui.Color)),
+    waveColor: dart.finalFieldType(dart.legacy(ui.Color))
+  }));
+  var _textKey = dart.privateName(text_liquid_fill, "_textKey");
+  var _waveController = dart.privateName(text_liquid_fill, "_waveController");
+  var _loadController = dart.privateName(text_liquid_fill, "_loadController");
+  var _loadValue = dart.privateName(text_liquid_fill, "_loadValue");
+  var _Location_parameterLocations = dart.privateName(widget_inspector, "_Location.parameterLocations");
+  var _Location_name = dart.privateName(widget_inspector, "_Location.name");
+  var _Location_column = dart.privateName(widget_inspector, "_Location.column");
+  var _Location_line = dart.privateName(widget_inspector, "_Location.line");
+  var _Location_file = dart.privateName(widget_inspector, "_Location.file");
+  const State_TickerProviderStateMixin$36 = class State_TickerProviderStateMixin extends framework.State$(dart.legacy(text_liquid_fill.TextLiquidFill)) {};
+  (State_TickerProviderStateMixin$36.new = function() {
+    ticker_provider.TickerProviderStateMixin$(dart.legacy(text_liquid_fill.TextLiquidFill))[dart.mixinNew].call(this);
+    State_TickerProviderStateMixin$36.__proto__.new.call(this);
+  }).prototype = State_TickerProviderStateMixin$36.prototype;
+  dart.applyMixin(State_TickerProviderStateMixin$36, ticker_provider.TickerProviderStateMixin$(dart.legacy(text_liquid_fill.TextLiquidFill)));
+  text_liquid_fill._TextLiquidFillState = class _TextLiquidFillState extends State_TickerProviderStateMixin$36 {
+    initState() {
+      let t0;
+      super.initState();
+      this[_waveController] = new animation_controller.AnimationController.new({vsync: this, duration: this.widget.waveDuration});
+      this[_loadController] = new animation_controller.AnimationController.new({vsync: this, duration: this.widget.loadDuration});
+      this[_loadValue] = (t0 = new (T.TweenOfdoubleL()).new({begin: 0.0, end: 100.0}).animate(this[_loadController]), (() => {
+        t0.addStatusListener(dart.fn(status => {
+          if (animation.AnimationStatus.completed == status) {
+            this[_waveController].stop();
+          }
+        }, T.AnimationStatusLToNull()));
+        return t0;
+      })());
+      this[_waveController].repeat();
+      this[_loadController].forward();
+    }
+    dispose() {
+      let t0, t0$, t0$0, t0$1;
+      t0 = this[_waveController];
+      t0 == null ? null : t0.stop();
+      t0$ = this[_waveController];
+      t0$ == null ? null : t0$.dispose();
+      t0$0 = this[_loadController];
+      t0$0 == null ? null : t0$0.stop();
+      t0$1 = this[_loadController];
+      t0$1 == null ? null : t0$1.dispose();
+      super.dispose();
+    }
+    build(context) {
+      return new basic.Stack.new({children: T.JSArrayOfWidgetL().of([new basic.SizedBox.new({height: this.widget.boxHeight, width: this.widget.boxWidth, child: new transitions.AnimatedBuilder.new({animation: this[_waveController], builder: dart.fn((context, child) => new basic.CustomPaint.new({painter: new text_liquid_fill._WavePainter.new({textKey: this[_textKey], waveAnimation: this[_waveController], percentValue: this[_loadValue].value, boxHeight: this.widget.boxHeight, waveColor: this.widget.waveColor}), $creationLocationd_0dea112b090073317d4: C[12] || CT.C12}), T.BuildContextLAndWidgetLToCustomPaintL()), $creationLocationd_0dea112b090073317d4: C[15] || CT.C15}), $creationLocationd_0dea112b090073317d4: C[19] || CT.C19}), new basic.SizedBox.new({height: this.widget.boxHeight, width: this.widget.boxWidth, child: new basic.ShaderMask.new({blendMode: ui.BlendMode.srcOut, shaderCallback: dart.fn(bounds => new gradient.LinearGradient.new({colors: T.JSArrayOfColorL().of([this.widget.boxBackgroundColor]), stops: T.JSArrayOfdoubleL().of([0.0])}).createShader(bounds), T.RectLToShaderL()), child: new container.Container.new({color: colors.Colors.transparent, child: new basic.Center.new({child: new text.Text.new(this.widget.text, {key: this[_textKey], style: this.widget.textStyle, textAlign: this.widget.textAlign, $creationLocationd_0dea112b090073317d4: C[24] || CT.C24}), $creationLocationd_0dea112b090073317d4: C[30] || CT.C30}), $creationLocationd_0dea112b090073317d4: C[33] || CT.C33}), $creationLocationd_0dea112b090073317d4: C[37] || CT.C37}), $creationLocationd_0dea112b090073317d4: C[42] || CT.C42})]), $creationLocationd_0dea112b090073317d4: C[47] || CT.C47});
+    }
+  };
+  (text_liquid_fill._TextLiquidFillState.new = function() {
+    this[_textKey] = T.GlobalKeyOfStateLOfStatefulWidgetL().new();
+    this[_waveController] = null;
+    this[_loadController] = null;
+    this[_loadValue] = null;
+    text_liquid_fill._TextLiquidFillState.__proto__.new.call(this);
+    ;
+  }).prototype = text_liquid_fill._TextLiquidFillState.prototype;
+  dart.addTypeTests(text_liquid_fill._TextLiquidFillState);
+  dart.addTypeCaches(text_liquid_fill._TextLiquidFillState);
+  dart.setMethodSignature(text_liquid_fill._TextLiquidFillState, () => ({
+    __proto__: dart.getMethods(text_liquid_fill._TextLiquidFillState.__proto__),
+    build: dart.fnType(dart.legacy(framework.Widget), [dart.legacy(framework.BuildContext)])
+  }));
+  dart.setLibraryUri(text_liquid_fill._TextLiquidFillState, I[1]);
+  dart.setFieldSignature(text_liquid_fill._TextLiquidFillState, () => ({
+    __proto__: dart.getFields(text_liquid_fill._TextLiquidFillState.__proto__),
+    [_textKey]: dart.finalFieldType(dart.legacy(framework.GlobalKey$(dart.legacy(framework.State$(dart.legacy(framework.StatefulWidget)))))),
+    [_waveController]: dart.fieldType(dart.legacy(animation_controller.AnimationController)),
+    [_loadController]: dart.fieldType(dart.legacy(animation_controller.AnimationController)),
+    [_loadValue]: dart.fieldType(dart.legacy(animation.Animation$(dart.legacy(core.double))))
+  }));
+  var _pi2 = dart.privateName(text_liquid_fill, "_pi2");
+  text_liquid_fill._WavePainter = class _WavePainter extends custom_paint.CustomPainter {
+    paint(canvas, size) {
+      let t0, t0$, t0$0;
+      let textBox = T.RenderBoxL().as(this.textKey.currentContext.findRenderObject());
+      let textHeight = textBox.size.height;
+      let percent = dart.notNull(this.percentValue) / 100.0;
+      let baseHeight = dart.notNull(this.boxHeight) / 2 + dart.notNull(textHeight) / 2 - percent * dart.notNull(textHeight);
+      let width = (t0 = size.width, t0 == null ? 200.0 : t0);
+      let height = (t0$ = size.height, t0$ == null ? 200.0 : t0$);
+      let path = ui.Path.new();
+      path.moveTo(0.0, baseHeight);
+      for (let i = 0.0; i < dart.notNull(width); i = i + 1) {
+        path.lineTo(i, baseHeight + math.sin(i / dart.notNull(width) * dart.notNull(this[_pi2]) + dart.notNull(this.waveAnimation.value) * dart.notNull(this[_pi2])) * 8);
+      }
+      path.lineTo(width, height);
+      path.lineTo(0.0, height);
+      path.close();
+      let wavePaint = (t0$0 = ui.Paint.new(), (() => {
+        t0$0.color = this.waveColor;
+        return t0$0;
+      })());
+      canvas.drawPath(path, wavePaint);
+    }
+    shouldRepaint(oldDelegate) {
+      T.CustomPainterL().as(oldDelegate);
+      return true;
+    }
+  };
+  (text_liquid_fill._WavePainter.new = function(opts) {
+    let textKey = opts && 'textKey' in opts ? opts.textKey : null;
+    let waveAnimation = opts && 'waveAnimation' in opts ? opts.waveAnimation : null;
+    let percentValue = opts && 'percentValue' in opts ? opts.percentValue : null;
+    let boxHeight = opts && 'boxHeight' in opts ? opts.boxHeight : null;
+    let waveColor = opts && 'waveColor' in opts ? opts.waveColor : null;
+    this[_pi2] = 2 * 3.141592653589793;
+    this.textKey = textKey;
+    this.waveAnimation = waveAnimation;
+    this.percentValue = percentValue;
+    this.boxHeight = boxHeight;
+    this.waveColor = waveColor;
+    text_liquid_fill._WavePainter.__proto__.new.call(this);
+    ;
+  }).prototype = text_liquid_fill._WavePainter.prototype;
+  dart.addTypeTests(text_liquid_fill._WavePainter);
+  dart.addTypeCaches(text_liquid_fill._WavePainter);
+  dart.setMethodSignature(text_liquid_fill._WavePainter, () => ({
+    __proto__: dart.getMethods(text_liquid_fill._WavePainter.__proto__),
+    paint: dart.fnType(dart.void, [dart.legacy(ui.Canvas), dart.legacy(ui.Size)]),
+    shouldRepaint: dart.fnType(dart.legacy(core.bool), [dart.legacy(core.Object)])
+  }));
+  dart.setLibraryUri(text_liquid_fill._WavePainter, I[1]);
+  dart.setFieldSignature(text_liquid_fill._WavePainter, () => ({
+    __proto__: dart.getFields(text_liquid_fill._WavePainter.__proto__),
+    [_pi2]: dart.finalFieldType(dart.legacy(core.double)),
+    textKey: dart.finalFieldType(dart.legacy(framework.GlobalKey$(dart.legacy(framework.State$(dart.legacy(framework.StatefulWidget)))))),
+    waveAnimation: dart.finalFieldType(dart.legacy(animation.Animation$(dart.legacy(core.double)))),
+    percentValue: dart.finalFieldType(dart.legacy(core.double)),
+    boxHeight: dart.finalFieldType(dart.legacy(core.double)),
+    waveColor: dart.finalFieldType(dart.legacy(ui.Color))
+  }));
+  dart.trackLibraries("packages/animated_text_kit/src/text_liquid_fill.dart", {
+    "package:animated_text_kit/src/text_liquid_fill.dart": text_liquid_fill
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["text_liquid_fill.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAWkB;;;;;;IAKA;;;;;;IAKD;;;;;;IAKA;;;;;;IAKF;;;;;;IAKA;;;;;;IAGA;;;;;;IAKD;;;;;;IAKA;;;;;;;AA2B0B;IAAsB;;;QAxBtD;QACW;QACV;QAEA;QACA;QACA;QACA;QACA;QACA;QACA;;IATU;IACV;IAEA;IACA;IACA;IACA;IACA;IACA;IACA;UACW,AAAG,IAAI;UACP,AAAG,SAAS;UACZ,AAAG,SAAS;UACZ,AAAG,YAAY;UACf,AAAG,YAAY;UACf,AAAG,SAAS;UACZ,AAAG,QAAQ;UACX,AAAG,kBAAkB;UACrB,AAAG,SAAS;AACxB,mEAAW,GAAG;;EAAC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAiBF,MAAX;AAKL,MAHD,wBAAkB,yDACT,gBACG,AAAO;AAMlB,MAHD,wBAAkB,yDACT,gBACG,AAAO;AASf,MANJ,yBAAa,AAAsC,qCAAjB,UAAU,gBAAe,wBAAR;AAC/C,6BAAkB,QAAC;AACnB,cAAoB,AAAU,uCAAG,MAAM;AAEf,YAAtB,AAAgB;;;;;AAIE,MAAxB,AAAgB;AACS,MAAzB,AAAgB;IAClB;;;AAIyB,WAAvB;0BAAiB;AACS,YAA1B;2BAAiB;AACM,aAAvB;4BAAiB;AACS,aAA1B;4BAAiB;AACF,MAAT;IACR;UAG0B;AACxB,YAAO,gCACa,yBAChB,gCACU,AAAO,8BACR,AAAO,6BACP,gDACM,gCACF,SAAc,SAAgB,UAC9B,oCACI,gDACE,+BACM,qCACD,AAAW,mCACd,AAAO,kCACP,AAAO,sPAM5B,gCACU,AAAO,8BACR,AAAO,6BACP,qCACgB,qCACL,QAAC,UAAW,AAG1B,yCAFQ,wBAAC,AAAO,yCACT,yBAAC,qBACK,MAAM,+BACd,oCACS,kCACP,6BACE,kBACL,AAAO,wBACF,uBACE,AAAO,kCACH,AAAO;IAQlC;;;IAvFM,iBAAW;IAEG;IAAiB;IAEnB;;;EAoFpB;;;;;;;;;;;;;;;;;UAmBoB,QAAa;;AACb,sCAAU,AAAQ,AAAe;AAC3C,uBAAa,AAAQ,AAAK,OAAN;AACpB,oBAAuB,aAAb,qBAAe;AACzB,uBACS,AAAK,AAAmB,aAAlC,kBAAY,IAAiB,aAAX,UAAU,IAAG,IAAM,AAAQ,OAAD,gBAAG,UAAU;AAExD,mBAAmB,KAAX,AAAK,IAAD,QAAC,aAAS;AACtB,oBAAqB,MAAZ,AAAK,IAAD,SAAC,cAAU;AACxB,iBAAO;AACe,MAA5B,AAAK,IAAD,QAAQ,KAAK,UAAU;AAC3B,eAAS,IAAI,KAAK,AAAE,CAAD,gBAAG,KAAK,GAAE,IAAA,AAAC,CAAA;AAI3B,QAHD,AAAK,IAAD,QACF,CAAC,EACD,AAAW,UAAD,GAAG,AAAuD,SAAlD,AAAE,AAAQ,AAAQ,CAAjB,gBAAG,KAAK,iBAAG,cAA6B,aAApB,AAAc,yCAAQ,eAAS;;AAIhD,MAA1B,AAAK,IAAD,QAAQ,KAAK,EAAE,MAAM;AACD,MAAxB,AAAK,IAAD,QAAQ,KAAK,MAAM;AACX,MAAZ,AAAK,IAAD;AACE,8CAAY;AAAS,qBAAQ;;;AACH,MAAhC,AAAO,MAAD,UAAU,IAAI,EAAE,SAAS;IACjC;;4BAGiC;AAC/B,YAAO;IACT;;;QApCiB;QACV;QACA;QACA;QACA;IAZD,aAAO,AAAE;IAQE;IACV;IACA;IACA;IACA;AALP;;EAME","file":"../../../../../../../../C:/packages/animated_text_kit/src/text_liquid_fill.dart.lib.js"}');
+  // Exports:
+  return {
+    src__text_liquid_fill: text_liquid_fill
+  };
+}));
+
+//# sourceMappingURL=text_liquid_fill.dart.lib.js.map

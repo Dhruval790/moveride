@@ -1,0 +1,1074 @@
+define(['dart_sdk', 'packages/flutter/src/services/system_channels.dart', 'packages/location_permissions/src/location_permissions.dart', 'packages/location_permissions/src/permission_enums.dart', 'packages/google_api_availability/src/google_api_availability.dart', 'packages/google_api_availability/src/models/google_play_services_availability.dart', 'packages/vector_math/vector_math.dart', 'packages/equatable/src/equatable_mixin.dart'], (function load__packages__geolocator__geolocator_dart(dart_sdk, packages__flutter__src__services__system_channels$46dart, packages__location_permissions__src__location_permissions$46dart, packages__location_permissions__src__permission_enums$46dart, packages__google_api_availability__src__google_api_availability$46dart, packages__google_api_availability__src__models__google_play_services_availability$46dart, packages__vector_math__vector_math$46dart, packages__equatable__src__equatable_mixin$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const async = dart_sdk.async;
+  const _js_helper = dart_sdk._js_helper;
+  const math = dart_sdk.math;
+  const _interceptors = dart_sdk._interceptors;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const platform_channel = packages__flutter__src__services__system_channels$46dart.src__services__platform_channel;
+  const message_codecs = packages__flutter__src__services__system_channels$46dart.src__services__message_codecs;
+  const message_codec = packages__flutter__src__services__system_channels$46dart.src__services__message_codec;
+  const location_permissions = packages__location_permissions__src__location_permissions$46dart.src__location_permissions;
+  const permission_enums = packages__location_permissions__src__permission_enums$46dart.src__permission_enums;
+  const google_api_availability = packages__google_api_availability__src__google_api_availability$46dart.src__google_api_availability;
+  const google_play_services_availability = packages__google_api_availability__src__models__google_play_services_availability$46dart.src__models__google_play_services_availability;
+  const vector_math = packages__vector_math__vector_math$46dart.vector_math;
+  const equatable = packages__equatable__src__equatable_mixin$46dart.src__equatable;
+  var geolocator = Object.create(dart.library);
+  var $_set = dartx._set;
+  var $_get = dartx._get;
+  var $toString = dartx.toString;
+  var $hashCode = dartx.hashCode;
+  var $_equals = dartx._equals;
+  var $containsKey = dartx.containsKey;
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    GeolocationStatusL: () => (T.GeolocationStatusL = dart.constFn(dart.legacy(geolocator.GeolocationStatus)))(),
+    boolL: () => (T.boolL = dart.constFn(dart.legacy(core.bool)))(),
+    MapL: () => (T.MapL = dart.constFn(dart.legacy(core.Map)))(),
+    ArgumentErrorL: () => (T.ArgumentErrorL = dart.constFn(dart.legacy(core.ArgumentError)))(),
+    PositionL: () => (T.PositionL = dart.constFn(dart.legacy(geolocator.Position)))(),
+    StringL: () => (T.StringL = dart.constFn(dart.legacy(core.String)))(),
+    dynamicToPositionL: () => (T.dynamicToPositionL = dart.constFn(dart.fnType(T.PositionL(), [dart.dynamic])))(),
+    _AsyncStarImplOfPositionL: () => (T._AsyncStarImplOfPositionL = dart.constFn(async._AsyncStarImpl$(T.PositionL())))(),
+    PermissionStatusL: () => (T.PermissionStatusL = dart.constFn(dart.legacy(permission_enums.PermissionStatus)))(),
+    IdentityMapOfStringL$StringL: () => (T.IdentityMapOfStringL$StringL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.StringL())))(),
+    ListL: () => (T.ListL = dart.constFn(dart.legacy(core.List)))(),
+    PlacemarkL: () => (T.PlacemarkL = dart.constFn(dart.legacy(geolocator.Placemark)))(),
+    ListOfPlacemarkL: () => (T.ListOfPlacemarkL = dart.constFn(core.List$(T.PlacemarkL())))(),
+    ListLOfPlacemarkL: () => (T.ListLOfPlacemarkL = dart.constFn(dart.legacy(T.ListOfPlacemarkL())))(),
+    IdentityMapOfStringL$dynamic: () => (T.IdentityMapOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), dart.dynamic)))(),
+    doubleL: () => (T.doubleL = dart.constFn(dart.legacy(core.double)))(),
+    IdentityMapOfStringL$doubleL: () => (T.IdentityMapOfStringL$doubleL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.doubleL())))(),
+    FutureOrOfdoubleL: () => (T.FutureOrOfdoubleL = dart.constFn(async.FutureOr$(T.doubleL())))(),
+    FutureOrLOfdoubleL: () => (T.FutureOrLOfdoubleL = dart.constFn(dart.legacy(T.FutureOrOfdoubleL())))(),
+    dynamicToFutureOrLOfdoubleL: () => (T.dynamicToFutureOrLOfdoubleL = dart.constFn(dart.fnType(T.FutureOrLOfdoubleL(), [dart.dynamic])))(),
+    FutureOfdoubleL: () => (T.FutureOfdoubleL = dart.constFn(async.Future$(T.doubleL())))(),
+    GeolocationPermissionL: () => (T.GeolocationPermissionL = dart.constFn(dart.legacy(geolocator.GeolocationPermission)))(),
+    LocationAccuracyL: () => (T.LocationAccuracyL = dart.constFn(dart.legacy(geolocator.LocationAccuracy)))(),
+    dynamicToPlacemarkL: () => (T.dynamicToPlacemarkL = dart.constFn(dart.fnType(T.PlacemarkL(), [dart.dynamic])))(),
+    ObjectL: () => (T.ObjectL = dart.constFn(dart.legacy(core.Object)))(),
+    JSArrayOfObjectL: () => (T.JSArrayOfObjectL = dart.constFn(_interceptors.JSArray$(T.ObjectL())))(),
+    ListOfPositionL: () => (T.ListOfPositionL = dart.constFn(core.List$(T.PositionL())))(),
+    ListLOfPositionL: () => (T.ListLOfPositionL = dart.constFn(dart.legacy(T.ListOfPositionL())))()
+  };
+  var T$Eval = Object.assign({
+    _: () => T$Eval
+  }, T);
+  var S = {
+    _: () => S
+  };
+  var S$Eval = Object.assign({
+    _: () => S$Eval
+  }, S);
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: message_codecs.StandardMessageCodec.prototype
+      });
+    },
+    get C1() {
+      return C[1] = dart.const({
+        __proto__: message_codecs.StandardMethodCodec.prototype,
+        [StandardMethodCodec_messageCodec]: C[2] || CT.C2
+      });
+    },
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: platform_channel.MethodChannel.prototype,
+        [MethodChannel__binaryMessenger]: null,
+        [MethodChannel_codec]: C[1] || CT.C1,
+        [MethodChannel_name]: "flutter.baseflow.com/geolocator/methods"
+      });
+    },
+    get C3() {
+      return C[3] = dart.const({
+        __proto__: platform_channel.EventChannel.prototype,
+        [EventChannel__binaryMessenger]: null,
+        [EventChannel_codec]: C[1] || CT.C1,
+        [EventChannel_name]: "flutter.baseflow.com/geolocator/events"
+      });
+    },
+    get C4() {
+      return C[4] = dart.const({
+        __proto__: geolocator.GeolocationPermission.prototype,
+        [GeolocationPermission_value]: 0
+      });
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: geolocator.LocationAccuracy.prototype,
+        [LocationAccuracy_value]: 4
+      });
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: geolocator.LocationOptions.prototype,
+        [LocationOptions_timeInterval]: 0,
+        [LocationOptions_forceAndroidLocationManager]: false,
+        [LocationOptions_distanceFilter]: 0,
+        [LocationOptions_accuracy]: C[5] || CT.C5
+      });
+    },
+    get C7() {
+      return C[7] = dart.const({
+        __proto__: geolocator.GeolocationPermission.prototype,
+        [GeolocationPermission_value]: 1
+      });
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: geolocator.GeolocationPermission.prototype,
+        [GeolocationPermission_value]: 2
+      });
+    },
+    get C9() {
+      return C[9] = dart.constList([C[4] || CT.C4, C[7] || CT.C7, C[8] || CT.C8], T.GeolocationPermissionL());
+    },
+    get C10() {
+      return C[10] = dart.constList(["location", "locationAlways", "locationWhenInUse"], T.StringL());
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: geolocator.GeolocationStatus.prototype,
+        [value$0]: 0
+      });
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: geolocator.GeolocationStatus.prototype,
+        [value$0]: 1
+      });
+    },
+    get C13() {
+      return C[13] = dart.const({
+        __proto__: geolocator.GeolocationStatus.prototype,
+        [value$0]: 2
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: geolocator.GeolocationStatus.prototype,
+        [value$0]: 3
+      });
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: geolocator.GeolocationStatus.prototype,
+        [value$0]: 4
+      });
+    },
+    get C16() {
+      return C[16] = dart.constList([C[11] || CT.C11, C[12] || CT.C12, C[13] || CT.C13, C[14] || CT.C14, C[15] || CT.C15], T.GeolocationStatusL());
+    },
+    get C17() {
+      return C[17] = dart.constList(["denied", "disabled", "granted", "restricted", "unknown"], T.StringL());
+    },
+    get C18() {
+      return C[18] = dart.const({
+        __proto__: geolocator.LocationAccuracy.prototype,
+        [LocationAccuracy_value]: 0
+      });
+    },
+    get C19() {
+      return C[19] = dart.const({
+        __proto__: geolocator.LocationAccuracy.prototype,
+        [LocationAccuracy_value]: 1
+      });
+    },
+    get C20() {
+      return C[20] = dart.const({
+        __proto__: geolocator.LocationAccuracy.prototype,
+        [LocationAccuracy_value]: 2
+      });
+    },
+    get C21() {
+      return C[21] = dart.const({
+        __proto__: geolocator.LocationAccuracy.prototype,
+        [LocationAccuracy_value]: 3
+      });
+    },
+    get C22() {
+      return C[22] = dart.const({
+        __proto__: geolocator.LocationAccuracy.prototype,
+        [LocationAccuracy_value]: 5
+      });
+    },
+    get C23() {
+      return C[23] = dart.constList([C[18] || CT.C18, C[19] || CT.C19, C[20] || CT.C20, C[21] || CT.C21, C[5] || CT.C5, C[22] || CT.C22], T.LocationAccuracyL());
+    },
+    get C24() {
+      return C[24] = dart.constList(["lowest", "low", "medium", "high", "best", "bestForNavigation"], T.StringL());
+    },
+    get C25() {
+      return C[25] = dart.fn(geolocator.Placemark.fromMap, T.dynamicToPlacemarkL());
+    },
+    get C26() {
+      return C[26] = dart.fn(geolocator.Position.fromMap, T.dynamicToPositionL());
+    },
+    get C27() {
+      return C[27] = dart.const({
+        __proto__: permission_enums.PermissionStatus.prototype,
+        [_name]: "PermissionStatus.denied",
+        index: 1
+      });
+    },
+    get C28() {
+      return C[28] = dart.const({
+        __proto__: permission_enums.PermissionStatus.prototype,
+        [_name]: "PermissionStatus.granted",
+        index: 2
+      });
+    },
+    get C29() {
+      return C[29] = dart.const({
+        __proto__: permission_enums.PermissionStatus.prototype,
+        [_name]: "PermissionStatus.restricted",
+        index: 3
+      });
+    }
+  }, false);
+  var C = Array(30).fill(void 0);
+  var I = ["package:geolocator/geolocator.dart"];
+  var forceAndroidLocationManager = dart.privateName(geolocator, "Geolocator.forceAndroidLocationManager");
+  var _onPositionChanged = dart.privateName(geolocator, "_onPositionChanged");
+  var _googlePlayServicesAvailability = dart.privateName(geolocator, "_googlePlayServicesAvailability");
+  var _methodChannel$ = dart.privateName(geolocator, "_methodChannel");
+  var _eventChannel$ = dart.privateName(geolocator, "_eventChannel");
+  var _permissionHandler$ = dart.privateName(geolocator, "_permissionHandler");
+  var MethodChannel__binaryMessenger = dart.privateName(platform_channel, "MethodChannel._binaryMessenger");
+  var StandardMethodCodec_messageCodec = dart.privateName(message_codecs, "StandardMethodCodec.messageCodec");
+  var MethodChannel_codec = dart.privateName(platform_channel, "MethodChannel.codec");
+  var MethodChannel_name = dart.privateName(platform_channel, "MethodChannel.name");
+  var EventChannel__binaryMessenger = dart.privateName(platform_channel, "EventChannel._binaryMessenger");
+  var EventChannel_codec = dart.privateName(platform_channel, "EventChannel.codec");
+  var EventChannel_name = dart.privateName(platform_channel, "EventChannel.name");
+  var GeolocationPermission_value = dart.privateName(geolocator, "GeolocationPermission.value");
+  var _shouldForceAndroidLocationManager = dart.privateName(geolocator, "_shouldForceAndroidLocationManager");
+  var LocationAccuracy_value = dart.privateName(geolocator, "LocationAccuracy.value");
+  var _getLocationPermission = dart.privateName(geolocator, "_getLocationPermission");
+  var _handleInvalidPermissions = dart.privateName(geolocator, "_handleInvalidPermissions");
+  var LocationOptions_timeInterval = dart.privateName(geolocator, "LocationOptions.timeInterval");
+  var LocationOptions_forceAndroidLocationManager = dart.privateName(geolocator, "LocationOptions.forceAndroidLocationManager");
+  var LocationOptions_distanceFilter = dart.privateName(geolocator, "LocationOptions.distanceFilter");
+  var LocationOptions_accuracy = dart.privateName(geolocator, "LocationOptions.accuracy");
+  geolocator.Geolocator = class Geolocator extends core.Object {
+    get forceAndroidLocationManager() {
+      return this[forceAndroidLocationManager];
+    }
+    set forceAndroidLocationManager(value) {
+      this[forceAndroidLocationManager] = value;
+    }
+    static new() {
+      if (geolocator.Geolocator._singleton == null) {
+        let methodChannel = C[0] || CT.C0;
+        let eventChannel = C[3] || CT.C3;
+        geolocator.Geolocator._singleton = new geolocator.Geolocator.private(methodChannel, eventChannel, location_permissions.LocationPermissions.new());
+      }
+      return geolocator.Geolocator._singleton;
+    }
+    checkGeolocationPermissionStatus(opts) {
+      let locationPermission = opts && 'locationPermission' in opts ? opts.locationPermission : C[4] || CT.C4;
+      return async.async(T.GeolocationStatusL(), (function* checkGeolocationPermissionStatus() {
+        let permissionStatus = (yield this[_permissionHandler$].checkPermissionStatus({level: geolocator.toPermissionLevel(locationPermission)}));
+        return geolocator.fromPermissionStatus(permissionStatus);
+      }).bind(this));
+    }
+    isLocationServiceEnabled() {
+      return async.async(T.boolL(), (function* isLocationServiceEnabled() {
+        let serviceStatus = (yield this[_permissionHandler$].checkServiceStatus());
+        return serviceStatus == permission_enums.ServiceStatus.enabled ? true : false;
+      }).bind(this));
+    }
+    [_shouldForceAndroidLocationManager]() {
+      return async.async(T.boolL(), (function* _shouldForceAndroidLocationManager() {
+        if (dart.test(this.forceAndroidLocationManager)) {
+          return true;
+        }
+        this[_googlePlayServicesAvailability] == null ? this[_googlePlayServicesAvailability] = (yield google_api_availability.GoogleApiAvailability.instance.checkGooglePlayServicesAvailability()) : null;
+        return !dart.equals(this[_googlePlayServicesAvailability], google_play_services_availability.GooglePlayServicesAvailability.success);
+      }).bind(this));
+    }
+    getCurrentPosition(opts) {
+      let desiredAccuracy = opts && 'desiredAccuracy' in opts ? opts.desiredAccuracy : C[5] || CT.C5;
+      let locationPermissionLevel = opts && 'locationPermissionLevel' in opts ? opts.locationPermissionLevel : C[4] || CT.C4;
+      return async.async(T.PositionL(), (function* getCurrentPosition() {
+        let permission = (yield this[_getLocationPermission](geolocator.toPermissionLevel(locationPermissionLevel)));
+        if (permission == permission_enums.PermissionStatus.granted) {
+          let locationOptions = new geolocator.LocationOptions.new({accuracy: desiredAccuracy, distanceFilter: 0, forceAndroidLocationManager: (yield this[_shouldForceAndroidLocationManager]())});
+          let positionMap = (yield this[_methodChannel$].invokeMethod(T.MapL(), "getCurrentPosition", geolocator.Codec.encodeLocationOptions(locationOptions)));
+          try {
+            return geolocator.Position.fromMap(positionMap);
+          } catch (e) {
+            let ex = dart.getThrown(e);
+            if (T.ArgumentErrorL().is(ex)) {
+              return null;
+            } else
+              throw e;
+          }
+        } else {
+          this[_handleInvalidPermissions](permission);
+        }
+        return null;
+      }).bind(this));
+    }
+    getLastKnownPosition(opts) {
+      let desiredAccuracy = opts && 'desiredAccuracy' in opts ? opts.desiredAccuracy : C[5] || CT.C5;
+      let locationPermissionLevel = opts && 'locationPermissionLevel' in opts ? opts.locationPermissionLevel : C[4] || CT.C4;
+      return async.async(T.PositionL(), (function* getLastKnownPosition() {
+        let permission = (yield this[_getLocationPermission](geolocator.toPermissionLevel(locationPermissionLevel)));
+        if (permission == permission_enums.PermissionStatus.granted) {
+          let locationOptions = new geolocator.LocationOptions.new({accuracy: desiredAccuracy, distanceFilter: 0, forceAndroidLocationManager: (yield this[_shouldForceAndroidLocationManager]())});
+          let positionMap = (yield this[_methodChannel$].invokeMethod(T.MapL(), "getLastKnownPosition", geolocator.Codec.encodeLocationOptions(locationOptions)));
+          try {
+            return geolocator.Position.fromMap(positionMap);
+          } catch (e) {
+            let ex = dart.getThrown(e);
+            if (T.ArgumentErrorL().is(ex)) {
+              return null;
+            } else
+              throw e;
+          }
+        } else {
+          this[_handleInvalidPermissions](permission);
+        }
+        return null;
+      }).bind(this));
+    }
+    getPositionStream(locationOptions = C[6] || CT.C6, locationPermissionLevel = C[4] || CT.C4) {
+      return new (T._AsyncStarImplOfPositionL()).new((function* getPositionStream(stream) {
+        let permission = (yield this[_getLocationPermission](geolocator.toPermissionLevel(locationPermissionLevel)));
+        if (permission == permission_enums.PermissionStatus.granted) {
+          this[_onPositionChanged] == null ? this[_onPositionChanged] = this[_eventChannel$].receiveBroadcastStream(geolocator.Codec.encodeLocationOptions(locationOptions)).map(T.PositionL(), dart.fn(element => geolocator.Position.fromMap(dart.dgsend(element, [T.StringL(), dart.dynamic], 'cast', [])), T.dynamicToPositionL())) : null;
+          if (stream.addStream(this[_onPositionChanged])) return;
+          yield;
+        } else {
+          this[_handleInvalidPermissions](permission);
+        }
+      }).bind(this)).stream;
+    }
+    [_getLocationPermission](locationPermissionLevel) {
+      return async.async(T.PermissionStatusL(), (function* _getLocationPermission() {
+        let permission = (yield this[_permissionHandler$].checkPermissionStatus({level: locationPermissionLevel}));
+        if (permission != permission_enums.PermissionStatus.granted) {
+          let permissionStatus = (yield this[_permissionHandler$].requestPermissions({permissionLevel: locationPermissionLevel}));
+          return permissionStatus;
+        } else {
+          return permission;
+        }
+      }).bind(this));
+    }
+    [_handleInvalidPermissions](permission) {
+      if (permission == permission_enums.PermissionStatus.denied) {
+        dart.throw(new message_codec.PlatformException.new({code: "PERMISSION_DENIED", message: "Access to location data denied", details: null}));
+      }
+    }
+    placemarkFromAddress(address, opts) {
+      let localeIdentifier = opts && 'localeIdentifier' in opts ? opts.localeIdentifier : null;
+      return async.async(T.ListLOfPlacemarkL(), (function* placemarkFromAddress() {
+        let parameters = new (T.IdentityMapOfStringL$StringL()).from(["address", address]);
+        if (localeIdentifier != null) {
+          parameters[$_set]("localeIdentifier", localeIdentifier);
+        }
+        let placemarks = (yield this[_methodChannel$].invokeMethod(T.ListL(), "placemarkFromAddress", parameters));
+        return geolocator.Placemark.fromMaps(placemarks);
+      }).bind(this));
+    }
+    placemarkFromCoordinates(latitude, longitude, opts) {
+      let localeIdentifier = opts && 'localeIdentifier' in opts ? opts.localeIdentifier : null;
+      return async.async(T.ListLOfPlacemarkL(), (function* placemarkFromCoordinates() {
+        let parameters = new (T.IdentityMapOfStringL$dynamic()).from(["latitude", latitude, "longitude", longitude]);
+        if (localeIdentifier != null) {
+          parameters[$_set]("localeIdentifier", localeIdentifier);
+        }
+        let placemarks = (yield this[_methodChannel$].invokeMethod(T.ListL(), "placemarkFromCoordinates", parameters));
+        return geolocator.Placemark.fromMaps(placemarks);
+      }).bind(this));
+    }
+    placemarkFromPosition(position, opts) {
+      let localeIdentifier = opts && 'localeIdentifier' in opts ? opts.localeIdentifier : null;
+      return this.placemarkFromCoordinates(position.latitude, position.longitude, {localeIdentifier: localeIdentifier});
+    }
+    distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude) {
+      return this[_methodChannel$].invokeMethod(dart.dynamic, "distanceBetween", new (T.IdentityMapOfStringL$doubleL()).from(["startLatitude", startLatitude, "startLongitude", startLongitude, "endLatitude", endLatitude, "endLongitude", endLongitude])).then(T.doubleL(), dart.fn(result => T.FutureOrLOfdoubleL().as(result), T.dynamicToFutureOrLOfdoubleL()));
+    }
+    bearingBetween(startLatitude, startLongitude, endLatitude, endLongitude) {
+      let startLongitudeRadians = vector_math.radians(startLongitude);
+      let startLatitudeRadians = vector_math.radians(startLatitude);
+      let endLongitudeRadians = vector_math.radians(endLongitude);
+      let endLatitudeRadians = vector_math.radians(endLatitude);
+      let y = math.sin(dart.notNull(endLongitudeRadians) - dart.notNull(startLongitudeRadians)) * math.cos(endLatitudeRadians);
+      let x = math.cos(startLatitudeRadians) * math.sin(endLatitudeRadians) - math.sin(startLatitudeRadians) * math.cos(endLatitudeRadians) * math.cos(dart.notNull(endLongitudeRadians) - dart.notNull(startLongitudeRadians));
+      return T.FutureOfdoubleL().value(vector_math.degrees(math.atan2(y, x)));
+    }
+  };
+  (geolocator.Geolocator.private = function(_methodChannel, _eventChannel, _permissionHandler) {
+    this[_onPositionChanged] = null;
+    this[forceAndroidLocationManager] = false;
+    this[_googlePlayServicesAvailability] = null;
+    this[_methodChannel$] = _methodChannel;
+    this[_eventChannel$] = _eventChannel;
+    this[_permissionHandler$] = _permissionHandler;
+    ;
+  }).prototype = geolocator.Geolocator.prototype;
+  dart.addTypeTests(geolocator.Geolocator);
+  dart.addTypeCaches(geolocator.Geolocator);
+  dart.setMethodSignature(geolocator.Geolocator, () => ({
+    __proto__: dart.getMethods(geolocator.Geolocator.__proto__),
+    checkGeolocationPermissionStatus: dart.fnType(dart.legacy(async.Future$(dart.legacy(geolocator.GeolocationStatus))), [], {locationPermission: dart.legacy(geolocator.GeolocationPermission)}, {}),
+    isLocationServiceEnabled: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.bool))), []),
+    [_shouldForceAndroidLocationManager]: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.bool))), []),
+    getCurrentPosition: dart.fnType(dart.legacy(async.Future$(dart.legacy(geolocator.Position))), [], {desiredAccuracy: dart.legacy(geolocator.LocationAccuracy), locationPermissionLevel: dart.legacy(geolocator.GeolocationPermission)}, {}),
+    getLastKnownPosition: dart.fnType(dart.legacy(async.Future$(dart.legacy(geolocator.Position))), [], {desiredAccuracy: dart.legacy(geolocator.LocationAccuracy), locationPermissionLevel: dart.legacy(geolocator.GeolocationPermission)}, {}),
+    getPositionStream: dart.fnType(dart.legacy(async.Stream$(dart.legacy(geolocator.Position))), [], [dart.legacy(geolocator.LocationOptions), dart.legacy(geolocator.GeolocationPermission)]),
+    [_getLocationPermission]: dart.fnType(dart.legacy(async.Future$(dart.legacy(permission_enums.PermissionStatus))), [dart.legacy(permission_enums.LocationPermissionLevel)]),
+    [_handleInvalidPermissions]: dart.fnType(dart.void, [dart.legacy(permission_enums.PermissionStatus)]),
+    placemarkFromAddress: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.List$(dart.legacy(geolocator.Placemark))))), [dart.legacy(core.String)], {localeIdentifier: dart.legacy(core.String)}, {}),
+    placemarkFromCoordinates: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.List$(dart.legacy(geolocator.Placemark))))), [dart.legacy(core.double), dart.legacy(core.double)], {localeIdentifier: dart.legacy(core.String)}, {}),
+    placemarkFromPosition: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.List$(dart.legacy(geolocator.Placemark))))), [dart.legacy(geolocator.Position)], {localeIdentifier: dart.legacy(core.String)}, {}),
+    distanceBetween: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.double))), [dart.legacy(core.double), dart.legacy(core.double), dart.legacy(core.double), dart.legacy(core.double)]),
+    bearingBetween: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.double))), [dart.legacy(core.double), dart.legacy(core.double), dart.legacy(core.double), dart.legacy(core.double)])
+  }));
+  dart.setLibraryUri(geolocator.Geolocator, I[0]);
+  dart.setFieldSignature(geolocator.Geolocator, () => ({
+    __proto__: dart.getFields(geolocator.Geolocator.__proto__),
+    [_methodChannel$]: dart.finalFieldType(dart.legacy(platform_channel.MethodChannel)),
+    [_eventChannel$]: dart.finalFieldType(dart.legacy(platform_channel.EventChannel)),
+    [_permissionHandler$]: dart.finalFieldType(dart.legacy(location_permissions.LocationPermissions)),
+    [_onPositionChanged]: dart.fieldType(dart.legacy(async.Stream$(dart.legacy(geolocator.Position)))),
+    forceAndroidLocationManager: dart.fieldType(dart.legacy(core.bool)),
+    [_googlePlayServicesAvailability]: dart.fieldType(dart.legacy(google_play_services_availability.GooglePlayServicesAvailability))
+  }));
+  dart.defineLazy(geolocator.Geolocator, {
+    /*geolocator.Geolocator._singleton*/get _singleton() {
+      return null;
+    },
+    set _singleton(_) {}
+  }, true);
+  const value$ = GeolocationPermission_value;
+  geolocator.GeolocationPermission = class GeolocationPermission extends core.Object {
+    get value() {
+      return this[value$];
+    }
+    set value(value) {
+      super.value = value;
+    }
+    toString() {
+      return "GeolocationPermission." + dart.str(geolocator.GeolocationPermission._names[$_get](this.value));
+    }
+  };
+  (geolocator.GeolocationPermission.__ = function(value) {
+    this[value$] = value;
+    ;
+  }).prototype = geolocator.GeolocationPermission.prototype;
+  dart.addTypeTests(geolocator.GeolocationPermission);
+  dart.addTypeCaches(geolocator.GeolocationPermission);
+  dart.setMethodSignature(geolocator.GeolocationPermission, () => ({
+    __proto__: dart.getMethods(geolocator.GeolocationPermission.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(geolocator.GeolocationPermission, I[0]);
+  dart.setFieldSignature(geolocator.GeolocationPermission, () => ({
+    __proto__: dart.getFields(geolocator.GeolocationPermission.__proto__),
+    value: dart.finalFieldType(dart.legacy(core.int))
+  }));
+  dart.defineExtensionMethods(geolocator.GeolocationPermission, ['toString']);
+  dart.defineLazy(geolocator.GeolocationPermission, {
+    /*geolocator.GeolocationPermission.location*/get location() {
+      return C[4] || CT.C4;
+    },
+    /*geolocator.GeolocationPermission.locationAlways*/get locationAlways() {
+      return C[7] || CT.C7;
+    },
+    /*geolocator.GeolocationPermission.locationWhenInUse*/get locationWhenInUse() {
+      return C[8] || CT.C8;
+    },
+    /*geolocator.GeolocationPermission.values*/get values() {
+      return C[9] || CT.C9;
+    },
+    /*geolocator.GeolocationPermission._names*/get _names() {
+      return C[10] || CT.C10;
+    }
+  }, true);
+  var value$0 = dart.privateName(geolocator, "GeolocationStatus.value");
+  geolocator.GeolocationStatus = class GeolocationStatus extends core.Object {
+    get value() {
+      return this[value$0];
+    }
+    set value(value) {
+      super.value = value;
+    }
+    toString() {
+      return "GeolocationStatus." + dart.str(geolocator.GeolocationStatus._names[$_get](this.value));
+    }
+  };
+  (geolocator.GeolocationStatus.__ = function(value) {
+    this[value$0] = value;
+    ;
+  }).prototype = geolocator.GeolocationStatus.prototype;
+  dart.addTypeTests(geolocator.GeolocationStatus);
+  dart.addTypeCaches(geolocator.GeolocationStatus);
+  dart.setMethodSignature(geolocator.GeolocationStatus, () => ({
+    __proto__: dart.getMethods(geolocator.GeolocationStatus.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(geolocator.GeolocationStatus, I[0]);
+  dart.setFieldSignature(geolocator.GeolocationStatus, () => ({
+    __proto__: dart.getFields(geolocator.GeolocationStatus.__proto__),
+    value: dart.finalFieldType(dart.legacy(core.int))
+  }));
+  dart.defineExtensionMethods(geolocator.GeolocationStatus, ['toString']);
+  dart.defineLazy(geolocator.GeolocationStatus, {
+    /*geolocator.GeolocationStatus.denied*/get denied() {
+      return C[11] || CT.C11;
+    },
+    /*geolocator.GeolocationStatus.disabled*/get disabled() {
+      return C[12] || CT.C12;
+    },
+    /*geolocator.GeolocationStatus.granted*/get granted() {
+      return C[13] || CT.C13;
+    },
+    /*geolocator.GeolocationStatus.restricted*/get restricted() {
+      return C[14] || CT.C14;
+    },
+    /*geolocator.GeolocationStatus.unknown*/get unknown() {
+      return C[15] || CT.C15;
+    },
+    /*geolocator.GeolocationStatus.values*/get values() {
+      return C[16] || CT.C16;
+    },
+    /*geolocator.GeolocationStatus._names*/get _names() {
+      return C[17] || CT.C17;
+    }
+  }, true);
+  const value$1 = LocationAccuracy_value;
+  geolocator.LocationAccuracy = class LocationAccuracy extends core.Object {
+    get value() {
+      return this[value$1];
+    }
+    set value(value) {
+      super.value = value;
+    }
+    toString() {
+      return "LocationAccuracy." + dart.str(geolocator.LocationAccuracy._names[$_get](this.value));
+    }
+  };
+  (geolocator.LocationAccuracy.__ = function(value) {
+    this[value$1] = value;
+    ;
+  }).prototype = geolocator.LocationAccuracy.prototype;
+  dart.addTypeTests(geolocator.LocationAccuracy);
+  dart.addTypeCaches(geolocator.LocationAccuracy);
+  dart.setMethodSignature(geolocator.LocationAccuracy, () => ({
+    __proto__: dart.getMethods(geolocator.LocationAccuracy.__proto__),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(geolocator.LocationAccuracy, I[0]);
+  dart.setFieldSignature(geolocator.LocationAccuracy, () => ({
+    __proto__: dart.getFields(geolocator.LocationAccuracy.__proto__),
+    value: dart.finalFieldType(dart.legacy(core.int))
+  }));
+  dart.defineExtensionMethods(geolocator.LocationAccuracy, ['toString']);
+  dart.defineLazy(geolocator.LocationAccuracy, {
+    /*geolocator.LocationAccuracy.lowest*/get lowest() {
+      return C[18] || CT.C18;
+    },
+    /*geolocator.LocationAccuracy.low*/get low() {
+      return C[19] || CT.C19;
+    },
+    /*geolocator.LocationAccuracy.medium*/get medium() {
+      return C[20] || CT.C20;
+    },
+    /*geolocator.LocationAccuracy.high*/get high() {
+      return C[21] || CT.C21;
+    },
+    /*geolocator.LocationAccuracy.best*/get best() {
+      return C[5] || CT.C5;
+    },
+    /*geolocator.LocationAccuracy.bestForNavigation*/get bestForNavigation() {
+      return C[22] || CT.C22;
+    },
+    /*geolocator.LocationAccuracy.values*/get values() {
+      return C[23] || CT.C23;
+    },
+    /*geolocator.LocationAccuracy._names*/get _names() {
+      return C[24] || CT.C24;
+    }
+  }, true);
+  const accuracy$ = LocationOptions_accuracy;
+  const distanceFilter$ = LocationOptions_distanceFilter;
+  const forceAndroidLocationManager$ = LocationOptions_forceAndroidLocationManager;
+  const timeInterval$ = LocationOptions_timeInterval;
+  geolocator.LocationOptions = class LocationOptions extends core.Object {
+    get accuracy() {
+      return this[accuracy$];
+    }
+    set accuracy(value) {
+      super.accuracy = value;
+    }
+    get distanceFilter() {
+      return this[distanceFilter$];
+    }
+    set distanceFilter(value) {
+      super.distanceFilter = value;
+    }
+    get forceAndroidLocationManager() {
+      return this[forceAndroidLocationManager$];
+    }
+    set forceAndroidLocationManager(value) {
+      super.forceAndroidLocationManager = value;
+    }
+    get timeInterval() {
+      return this[timeInterval$];
+    }
+    set timeInterval(value) {
+      super.timeInterval = value;
+    }
+  };
+  (geolocator.LocationOptions.new = function(opts) {
+    let accuracy = opts && 'accuracy' in opts ? opts.accuracy : C[5] || CT.C5;
+    let distanceFilter = opts && 'distanceFilter' in opts ? opts.distanceFilter : 0;
+    let forceAndroidLocationManager = opts && 'forceAndroidLocationManager' in opts ? opts.forceAndroidLocationManager : false;
+    let timeInterval = opts && 'timeInterval' in opts ? opts.timeInterval : 0;
+    this[accuracy$] = accuracy;
+    this[distanceFilter$] = distanceFilter;
+    this[forceAndroidLocationManager$] = forceAndroidLocationManager;
+    this[timeInterval$] = timeInterval;
+    ;
+  }).prototype = geolocator.LocationOptions.prototype;
+  dart.addTypeTests(geolocator.LocationOptions);
+  dart.addTypeCaches(geolocator.LocationOptions);
+  dart.setLibraryUri(geolocator.LocationOptions, I[0]);
+  dart.setFieldSignature(geolocator.LocationOptions, () => ({
+    __proto__: dart.getFields(geolocator.LocationOptions.__proto__),
+    accuracy: dart.finalFieldType(dart.legacy(geolocator.LocationAccuracy)),
+    distanceFilter: dart.finalFieldType(dart.legacy(core.int)),
+    forceAndroidLocationManager: dart.finalFieldType(dart.legacy(core.bool)),
+    timeInterval: dart.finalFieldType(dart.legacy(core.int))
+  }));
+  var name$ = dart.privateName(geolocator, "Placemark.name");
+  var isoCountryCode$ = dart.privateName(geolocator, "Placemark.isoCountryCode");
+  var country$ = dart.privateName(geolocator, "Placemark.country");
+  var postalCode$ = dart.privateName(geolocator, "Placemark.postalCode");
+  var administrativeArea$ = dart.privateName(geolocator, "Placemark.administrativeArea");
+  var subAdministrativeArea$ = dart.privateName(geolocator, "Placemark.subAdministrativeArea");
+  var locality$ = dart.privateName(geolocator, "Placemark.locality");
+  var subLocality$ = dart.privateName(geolocator, "Placemark.subLocality");
+  var thoroughfare$ = dart.privateName(geolocator, "Placemark.thoroughfare");
+  var subThoroughfare$ = dart.privateName(geolocator, "Placemark.subThoroughfare");
+  var position$ = dart.privateName(geolocator, "Placemark.position");
+  geolocator.Placemark = class Placemark extends core.Object {
+    get name() {
+      return this[name$];
+    }
+    set name(value) {
+      super.name = value;
+    }
+    get isoCountryCode() {
+      return this[isoCountryCode$];
+    }
+    set isoCountryCode(value) {
+      super.isoCountryCode = value;
+    }
+    get country() {
+      return this[country$];
+    }
+    set country(value) {
+      super.country = value;
+    }
+    get postalCode() {
+      return this[postalCode$];
+    }
+    set postalCode(value) {
+      super.postalCode = value;
+    }
+    get administrativeArea() {
+      return this[administrativeArea$];
+    }
+    set administrativeArea(value) {
+      super.administrativeArea = value;
+    }
+    get subAdministrativeArea() {
+      return this[subAdministrativeArea$];
+    }
+    set subAdministrativeArea(value) {
+      super.subAdministrativeArea = value;
+    }
+    get locality() {
+      return this[locality$];
+    }
+    set locality(value) {
+      super.locality = value;
+    }
+    get subLocality() {
+      return this[subLocality$];
+    }
+    set subLocality(value) {
+      super.subLocality = value;
+    }
+    get thoroughfare() {
+      return this[thoroughfare$];
+    }
+    set thoroughfare(value) {
+      super.thoroughfare = value;
+    }
+    get subThoroughfare() {
+      return this[subThoroughfare$];
+    }
+    set subThoroughfare(value) {
+      super.subThoroughfare = value;
+    }
+    get position() {
+      return this[position$];
+    }
+    set position(value) {
+      super.position = value;
+    }
+    _equals(o) {
+      if (o == null) return false;
+      return T.PlacemarkL().is(o) && o.administrativeArea == this.administrativeArea && o.country == this.country && o.isoCountryCode == this.isoCountryCode && o.locality == this.locality && o.name == this.name && dart.equals(o.position, this.position) && o.postalCode == this.postalCode && o.subAdministrativeArea == this.subAdministrativeArea && o.subLocality == this.subLocality && o.subThoroughfare == this.subThoroughfare && o.thoroughfare == this.thoroughfare;
+    }
+    get hashCode() {
+      return (dart.hashCode(this.administrativeArea) ^ dart.hashCode(this.country) ^ dart.hashCode(this.isoCountryCode) ^ dart.hashCode(this.locality) ^ dart.hashCode(this.name) ^ dart.notNull(dart.hashCode(this.position)) ^ dart.hashCode(this.postalCode) ^ dart.hashCode(this.subAdministrativeArea) ^ dart.hashCode(this.subLocality) ^ dart.hashCode(this.subThoroughfare) ^ dart.hashCode(this.thoroughfare)) >>> 0;
+    }
+    static fromMaps(message) {
+      if (message == null) {
+        dart.throw(new core.ArgumentError.new("The parameter 'message' should not be null."));
+      }
+      let list = T.ListLOfPlacemarkL().as(dart.dsend(dart.dgsend(message, [T.PlacemarkL()], 'map', [C[25] || CT.C25]), 'toList', []));
+      return list;
+    }
+    static fromMap(message) {
+      let t4, t4$, t4$0, t4$1, t4$2, t4$3, t4$4, t4$5, t4$6, t4$7;
+      if (message == null) {
+        dart.throw(new core.ArgumentError.new("The parameter 'message' should not be null."));
+      }
+      let placemarkMap = T.MapL().as(message);
+      return new geolocator.Placemark.__({name: T.StringL().as((t4 = placemarkMap[$_get]("name"), t4 == null ? "" : t4)), isoCountryCode: T.StringL().as((t4$ = placemarkMap[$_get]("isoCountryCode"), t4$ == null ? "" : t4$)), country: T.StringL().as((t4$0 = placemarkMap[$_get]("country"), t4$0 == null ? "" : t4$0)), postalCode: T.StringL().as((t4$1 = placemarkMap[$_get]("postalCode"), t4$1 == null ? "" : t4$1)), administrativeArea: T.StringL().as((t4$2 = placemarkMap[$_get]("administrativeArea"), t4$2 == null ? "" : t4$2)), subAdministrativeArea: T.StringL().as((t4$3 = placemarkMap[$_get]("subAdministrativeArea"), t4$3 == null ? "" : t4$3)), locality: T.StringL().as((t4$4 = placemarkMap[$_get]("locality"), t4$4 == null ? "" : t4$4)), subLocality: T.StringL().as((t4$5 = placemarkMap[$_get]("subLocality"), t4$5 == null ? "" : t4$5)), thoroughfare: T.StringL().as((t4$6 = placemarkMap[$_get]("thoroughfare"), t4$6 == null ? "" : t4$6)), subThoroughfare: T.StringL().as((t4$7 = placemarkMap[$_get]("subThoroughfare"), t4$7 == null ? "" : t4$7)), position: placemarkMap[$_get]("position") != null ? geolocator.Position.fromMap(placemarkMap[$_get]("position")) : null});
+    }
+    toJson() {
+      return new (T.IdentityMapOfStringL$dynamic()).from(["name", this.name, "isoCountryCode", this.isoCountryCode, "country", this.country, "postalCode", this.postalCode, "administrativeArea", this.administrativeArea, "subAdministrativeArea", this.subAdministrativeArea, "locality", this.locality, "subLocality", this.subLocality, "thoroughfare", this.thoroughfare, "subThoroughfare", this.subThoroughfare, "position", this.position.toJson()]);
+    }
+  };
+  (geolocator.Placemark.new = function(opts) {
+    let name = opts && 'name' in opts ? opts.name : null;
+    let isoCountryCode = opts && 'isoCountryCode' in opts ? opts.isoCountryCode : null;
+    let country = opts && 'country' in opts ? opts.country : null;
+    let postalCode = opts && 'postalCode' in opts ? opts.postalCode : null;
+    let administrativeArea = opts && 'administrativeArea' in opts ? opts.administrativeArea : null;
+    let subAdministrativeArea = opts && 'subAdministrativeArea' in opts ? opts.subAdministrativeArea : null;
+    let locality = opts && 'locality' in opts ? opts.locality : null;
+    let subLocality = opts && 'subLocality' in opts ? opts.subLocality : null;
+    let thoroughfare = opts && 'thoroughfare' in opts ? opts.thoroughfare : null;
+    let subThoroughfare = opts && 'subThoroughfare' in opts ? opts.subThoroughfare : null;
+    let position = opts && 'position' in opts ? opts.position : null;
+    this[name$] = name;
+    this[isoCountryCode$] = isoCountryCode;
+    this[country$] = country;
+    this[postalCode$] = postalCode;
+    this[administrativeArea$] = administrativeArea;
+    this[subAdministrativeArea$] = subAdministrativeArea;
+    this[locality$] = locality;
+    this[subLocality$] = subLocality;
+    this[thoroughfare$] = thoroughfare;
+    this[subThoroughfare$] = subThoroughfare;
+    this[position$] = position;
+    ;
+  }).prototype = geolocator.Placemark.prototype;
+  (geolocator.Placemark.__ = function(opts) {
+    let name = opts && 'name' in opts ? opts.name : null;
+    let isoCountryCode = opts && 'isoCountryCode' in opts ? opts.isoCountryCode : null;
+    let country = opts && 'country' in opts ? opts.country : null;
+    let postalCode = opts && 'postalCode' in opts ? opts.postalCode : null;
+    let administrativeArea = opts && 'administrativeArea' in opts ? opts.administrativeArea : null;
+    let subAdministrativeArea = opts && 'subAdministrativeArea' in opts ? opts.subAdministrativeArea : null;
+    let locality = opts && 'locality' in opts ? opts.locality : null;
+    let subLocality = opts && 'subLocality' in opts ? opts.subLocality : null;
+    let thoroughfare = opts && 'thoroughfare' in opts ? opts.thoroughfare : null;
+    let subThoroughfare = opts && 'subThoroughfare' in opts ? opts.subThoroughfare : null;
+    let position = opts && 'position' in opts ? opts.position : null;
+    this[name$] = name;
+    this[isoCountryCode$] = isoCountryCode;
+    this[country$] = country;
+    this[postalCode$] = postalCode;
+    this[administrativeArea$] = administrativeArea;
+    this[subAdministrativeArea$] = subAdministrativeArea;
+    this[locality$] = locality;
+    this[subLocality$] = subLocality;
+    this[thoroughfare$] = thoroughfare;
+    this[subThoroughfare$] = subThoroughfare;
+    this[position$] = position;
+    ;
+  }).prototype = geolocator.Placemark.prototype;
+  dart.addTypeTests(geolocator.Placemark);
+  dart.addTypeCaches(geolocator.Placemark);
+  dart.setMethodSignature(geolocator.Placemark, () => ({
+    __proto__: dart.getMethods(geolocator.Placemark.__proto__),
+    _equals: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    [$_equals]: dart.fnType(dart.legacy(core.bool), [dart.dynamic]),
+    toJson: dart.fnType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic)), [])
+  }));
+  dart.setGetterSignature(geolocator.Placemark, () => ({
+    __proto__: dart.getGetters(geolocator.Placemark.__proto__),
+    hashCode: dart.legacy(core.int),
+    [$hashCode]: dart.legacy(core.int)
+  }));
+  dart.setLibraryUri(geolocator.Placemark, I[0]);
+  dart.setFieldSignature(geolocator.Placemark, () => ({
+    __proto__: dart.getFields(geolocator.Placemark.__proto__),
+    name: dart.finalFieldType(dart.legacy(core.String)),
+    isoCountryCode: dart.finalFieldType(dart.legacy(core.String)),
+    country: dart.finalFieldType(dart.legacy(core.String)),
+    postalCode: dart.finalFieldType(dart.legacy(core.String)),
+    administrativeArea: dart.finalFieldType(dart.legacy(core.String)),
+    subAdministrativeArea: dart.finalFieldType(dart.legacy(core.String)),
+    locality: dart.finalFieldType(dart.legacy(core.String)),
+    subLocality: dart.finalFieldType(dart.legacy(core.String)),
+    thoroughfare: dart.finalFieldType(dart.legacy(core.String)),
+    subThoroughfare: dart.finalFieldType(dart.legacy(core.String)),
+    position: dart.finalFieldType(dart.legacy(geolocator.Position))
+  }));
+  dart.defineExtensionMethods(geolocator.Placemark, ['_equals']);
+  dart.defineExtensionAccessors(geolocator.Placemark, ['hashCode']);
+  var latitude$ = dart.privateName(geolocator, "Position.latitude");
+  var longitude$ = dart.privateName(geolocator, "Position.longitude");
+  var timestamp$ = dart.privateName(geolocator, "Position.timestamp");
+  var mocked$ = dart.privateName(geolocator, "Position.mocked");
+  var altitude$ = dart.privateName(geolocator, "Position.altitude");
+  var accuracy$0 = dart.privateName(geolocator, "Position.accuracy");
+  var heading$ = dart.privateName(geolocator, "Position.heading");
+  var speed$ = dart.privateName(geolocator, "Position.speed");
+  var speedAccuracy$ = dart.privateName(geolocator, "Position.speedAccuracy");
+  geolocator.Position = class Position extends equatable.Equatable {
+    get latitude() {
+      return this[latitude$];
+    }
+    set latitude(value) {
+      super.latitude = value;
+    }
+    get longitude() {
+      return this[longitude$];
+    }
+    set longitude(value) {
+      super.longitude = value;
+    }
+    get timestamp() {
+      return this[timestamp$];
+    }
+    set timestamp(value) {
+      super.timestamp = value;
+    }
+    get mocked() {
+      return this[mocked$];
+    }
+    set mocked(value) {
+      super.mocked = value;
+    }
+    get altitude() {
+      return this[altitude$];
+    }
+    set altitude(value) {
+      super.altitude = value;
+    }
+    get accuracy() {
+      return this[accuracy$0];
+    }
+    set accuracy(value) {
+      super.accuracy = value;
+    }
+    get heading() {
+      return this[heading$];
+    }
+    set heading(value) {
+      super.heading = value;
+    }
+    get speed() {
+      return this[speed$];
+    }
+    set speed(value) {
+      super.speed = value;
+    }
+    get speedAccuracy() {
+      return this[speedAccuracy$];
+    }
+    set speedAccuracy(value) {
+      super.speedAccuracy = value;
+    }
+    get props() {
+      return T.JSArrayOfObjectL().of([this.longitude, this.latitude, this.timestamp, this.mocked, this.accuracy, this.altitude, this.heading, this.speed, this.speedAccuracy]);
+    }
+    _equals(o) {
+      if (o == null) return false;
+      let areEqual = T.PositionL().is(o) && o.accuracy == this.accuracy && o.altitude == this.altitude && o.heading == this.heading && o.latitude == this.latitude && o.longitude == this.longitude && o.speed == this.speed && o.speedAccuracy == this.speedAccuracy && dart.equals(o.timestamp, this.timestamp);
+      return areEqual;
+    }
+    get hashCode() {
+      return (dart.hashCode(this.accuracy) ^ dart.hashCode(this.altitude) ^ dart.hashCode(this.heading) ^ dart.hashCode(this.latitude) ^ dart.hashCode(this.longitude) ^ dart.hashCode(this.speed) ^ dart.hashCode(this.speedAccuracy) ^ dart.notNull(dart.hashCode(this.timestamp))) >>> 0;
+    }
+    toString() {
+      return "Lat: " + dart.str(this.latitude) + ", Long: " + dart.str(this.longitude);
+    }
+    static fromMaps(message) {
+      if (message == null) {
+        dart.throw(new core.ArgumentError.new("The parameter 'message' should not be null."));
+      }
+      let list = T.ListLOfPositionL().as(dart.dsend(dart.dgsend(message, [T.PositionL()], 'map', [C[26] || CT.C26]), 'toList', []));
+      return list;
+    }
+    static fromMap(message) {
+      let t4, t4$, t4$0, t4$1, t4$2, t4$3;
+      if (message == null) {
+        dart.throw(new core.ArgumentError.new("The parameter 'message' should not be null."));
+      }
+      let positionMap = T.MapL().as(message);
+      if (!dart.test(positionMap[$containsKey]("latitude"))) {
+        dart.throw(new core.ArgumentError.value(positionMap, "positionMap", "The supplied map doesn't contain the mandatory key `latitude`."));
+      }
+      if (!dart.test(positionMap[$containsKey]("longitude"))) {
+        dart.throw(new core.ArgumentError.value(positionMap, "positionMap", "The supplied map doesn't contain the mandatory key `longitude`."));
+      }
+      let timestamp = positionMap[$_get]("timestamp") != null ? new core.DateTime.fromMillisecondsSinceEpoch(core.int.as(dart.dsend(positionMap[$_get]("timestamp"), 'toInt', [])), {isUtc: true}) : null;
+      return new geolocator.Position.__({latitude: T.doubleL().as(positionMap[$_get]("latitude")), longitude: T.doubleL().as(positionMap[$_get]("longitude")), timestamp: timestamp, mocked: T.boolL().as((t4 = positionMap[$_get]("mocked"), t4 == null ? false : t4)), altitude: T.doubleL().as((t4$ = positionMap[$_get]("altitude"), t4$ == null ? 0.0 : t4$)), accuracy: T.doubleL().as((t4$0 = positionMap[$_get]("accuracy"), t4$0 == null ? 0.0 : t4$0)), heading: T.doubleL().as((t4$1 = positionMap[$_get]("heading"), t4$1 == null ? 0.0 : t4$1)), speed: T.doubleL().as((t4$2 = positionMap[$_get]("speed"), t4$2 == null ? 0.0 : t4$2)), speedAccuracy: T.doubleL().as((t4$3 = positionMap[$_get]("speed_accuracy"), t4$3 == null ? 0.0 : t4$3))});
+    }
+    toJson() {
+      let t4;
+      return new (T.IdentityMapOfStringL$dynamic()).from(["longitude", this.longitude, "latitude", this.latitude, "timestamp", (t4 = this.timestamp, t4 == null ? null : t4.millisecondsSinceEpoch), "mocked", this.mocked, "accuracy", this.accuracy, "altitude", this.altitude, "heading", this.heading, "speed", this.speed, "speedAccuracy", this.speedAccuracy]);
+    }
+  };
+  (geolocator.Position.new = function(opts) {
+    let longitude = opts && 'longitude' in opts ? opts.longitude : null;
+    let latitude = opts && 'latitude' in opts ? opts.latitude : null;
+    let timestamp = opts && 'timestamp' in opts ? opts.timestamp : null;
+    let mocked = opts && 'mocked' in opts ? opts.mocked : null;
+    let accuracy = opts && 'accuracy' in opts ? opts.accuracy : null;
+    let altitude = opts && 'altitude' in opts ? opts.altitude : null;
+    let heading = opts && 'heading' in opts ? opts.heading : null;
+    let speed = opts && 'speed' in opts ? opts.speed : null;
+    let speedAccuracy = opts && 'speedAccuracy' in opts ? opts.speedAccuracy : null;
+    this[longitude$] = longitude;
+    this[latitude$] = latitude;
+    this[timestamp$] = timestamp;
+    this[mocked$] = mocked;
+    this[accuracy$0] = accuracy;
+    this[altitude$] = altitude;
+    this[heading$] = heading;
+    this[speed$] = speed;
+    this[speedAccuracy$] = speedAccuracy;
+    geolocator.Position.__proto__.new.call(this);
+    ;
+  }).prototype = geolocator.Position.prototype;
+  (geolocator.Position.__ = function(opts) {
+    let longitude = opts && 'longitude' in opts ? opts.longitude : null;
+    let latitude = opts && 'latitude' in opts ? opts.latitude : null;
+    let timestamp = opts && 'timestamp' in opts ? opts.timestamp : null;
+    let mocked = opts && 'mocked' in opts ? opts.mocked : null;
+    let accuracy = opts && 'accuracy' in opts ? opts.accuracy : null;
+    let altitude = opts && 'altitude' in opts ? opts.altitude : null;
+    let heading = opts && 'heading' in opts ? opts.heading : null;
+    let speed = opts && 'speed' in opts ? opts.speed : null;
+    let speedAccuracy = opts && 'speedAccuracy' in opts ? opts.speedAccuracy : null;
+    this[longitude$] = longitude;
+    this[latitude$] = latitude;
+    this[timestamp$] = timestamp;
+    this[mocked$] = mocked;
+    this[accuracy$0] = accuracy;
+    this[altitude$] = altitude;
+    this[heading$] = heading;
+    this[speed$] = speed;
+    this[speedAccuracy$] = speedAccuracy;
+    geolocator.Position.__proto__.new.call(this);
+    ;
+  }).prototype = geolocator.Position.prototype;
+  dart.addTypeTests(geolocator.Position);
+  dart.addTypeCaches(geolocator.Position);
+  dart.setMethodSignature(geolocator.Position, () => ({
+    __proto__: dart.getMethods(geolocator.Position.__proto__),
+    toJson: dart.fnType(dart.legacy(core.Map$(dart.legacy(core.String), dart.dynamic)), [])
+  }));
+  dart.setGetterSignature(geolocator.Position, () => ({
+    __proto__: dart.getGetters(geolocator.Position.__proto__),
+    props: dart.legacy(core.List$(dart.legacy(core.Object)))
+  }));
+  dart.setLibraryUri(geolocator.Position, I[0]);
+  dart.setFieldSignature(geolocator.Position, () => ({
+    __proto__: dart.getFields(geolocator.Position.__proto__),
+    latitude: dart.finalFieldType(dart.legacy(core.double)),
+    longitude: dart.finalFieldType(dart.legacy(core.double)),
+    timestamp: dart.finalFieldType(dart.legacy(core.DateTime)),
+    mocked: dart.finalFieldType(dart.legacy(core.bool)),
+    altitude: dart.finalFieldType(dart.legacy(core.double)),
+    accuracy: dart.finalFieldType(dart.legacy(core.double)),
+    heading: dart.finalFieldType(dart.legacy(core.double)),
+    speed: dart.finalFieldType(dart.legacy(core.double)),
+    speedAccuracy: dart.finalFieldType(dart.legacy(core.double))
+  }));
+  dart.defineExtensionMethods(geolocator.Position, ['_equals', 'toString']);
+  dart.defineExtensionAccessors(geolocator.Position, ['hashCode']);
+  geolocator.Codec = class Codec extends core.Object {
+    static encodeLocationOptions(locationOptions) {
+      return new (T.IdentityMapOfStringL$dynamic()).from(["accuracy", locationOptions.accuracy.value, "distanceFilter", locationOptions.distanceFilter, "forceAndroidLocationManager", locationOptions.forceAndroidLocationManager, "timeInterval", locationOptions.timeInterval]);
+    }
+  };
+  (geolocator.Codec.new = function() {
+    ;
+  }).prototype = geolocator.Codec.prototype;
+  dart.addTypeTests(geolocator.Codec);
+  dart.addTypeCaches(geolocator.Codec);
+  dart.setLibraryUri(geolocator.Codec, I[0]);
+  var _name = dart.privateName(permission_enums, "_name");
+  geolocator.fromPermissionStatus = function fromPermissionStatus(status) {
+    switch (status) {
+      case C[27] || CT.C27:
+      {
+        return geolocator.GeolocationStatus.denied;
+      }
+      case C[28] || CT.C28:
+      {
+        return geolocator.GeolocationStatus.granted;
+      }
+      case C[29] || CT.C29:
+      {
+        return geolocator.GeolocationStatus.restricted;
+      }
+      default:
+      {
+        return geolocator.GeolocationStatus.unknown;
+      }
+    }
+  };
+  geolocator.toPermissionLevel = function toPermissionLevel(permission) {
+    switch (permission) {
+      case C[7] || CT.C7:
+      {
+        return permission_enums.LocationPermissionLevel.locationAlways;
+      }
+      case C[8] || CT.C8:
+      {
+        return permission_enums.LocationPermissionLevel.locationWhenInUse;
+      }
+      default:
+      {
+        return permission_enums.LocationPermissionLevel.location;
+      }
+    }
+  };
+  dart.trackLibraries("packages/geolocator/geolocator.dart", {
+    "package:geolocator/geolocator.dart": geolocator
+  }, {
+    "package:geolocator/geolocator.dart": ["models/geolocation_enums.dart", "models/location_accuracy.dart", "models/location_options.dart", "models/placemark.dart", "models/position.dart", "utils/codec.dart"]
+  }, '{"version":3,"sourceRoot":"","sources":["geolocator.dart","models/geolocation_enums.dart","models/location_accuracy.dart","models/location_options.dart","models/placemark.dart","models/position.dart","utils/codec.dart"],"names":[],"mappings":"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","file":"../../../../../../../C:/packages/geolocator/geolocator.dart.lib.js"}');
+  // Exports:
+  return {
+    geolocator: geolocator
+  };
+}));
+
+//# sourceMappingURL=geolocator.dart.lib.js.map

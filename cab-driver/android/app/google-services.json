@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "371478357520",
+    "firebase_url": "https://moveride-abaeb-default-rtdb.firebaseio.com",
+    "project_id": "moveride-abaeb",
+    "storage_bucket": "moveride-abaeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371478357520:android:986c6ecab4d5049d870c95",
+        "android_client_info": {
+          "package_name": "com.example.move_ride_sgp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371478357520-kajmgrhtek1314t90lm8aa8nsv88avie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7gg8RqlEXfqYveCz1oo1s17izaxCGq90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371478357520-kajmgrhtek1314t90lm8aa8nsv88avie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371478357520:android:77d2ba78f4b69eda870c95",
+        "android_client_info": {
+          "package_name": "com.ufinix.cabdriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371478357520-kajmgrhtek1314t90lm8aa8nsv88avie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7gg8RqlEXfqYveCz1oo1s17izaxCGq90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371478357520-kajmgrhtek1314t90lm8aa8nsv88avie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

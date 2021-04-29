@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">371478357520-kajmgrhtek1314t90lm8aa8nsv88avie.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://moveride-abaeb-default-rtdb.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">371478357520</string>
+    <string name="google_api_key" translatable="false">AIzaSyD7gg8RqlEXfqYveCz1oo1s17izaxCGq90</string>
+    <string name="google_app_id" translatable="false">1:371478357520:android:986c6ecab4d5049d870c95</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD7gg8RqlEXfqYveCz1oo1s17izaxCGq90</string>
+    <string name="google_storage_bucket" translatable="false">moveride-abaeb.appspot.com</string>
+    <string name="project_id" translatable="false">moveride-abaeb</string>
+</resources>
